@@ -40,7 +40,7 @@ export default function Layout() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('mousemove', handleMouseMove, { passive: true });
         window.addEventListener('mouseover', handleMouseOver, { passive: true });
-        
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('mousemove', handleMouseMove);
@@ -52,7 +52,7 @@ export default function Layout() {
     return (
         <div className="flex flex-col min-h-screen font-body text-on-background bg-background cursor-none">
             {/* Dynamic Cursor */}
-            <div 
+            <div
                 ref={cursorRef}
                 className="fixed top-0 left-0 pointer-events-none z-[9999]"
                 style={{ transform: 'translate3d(-100px, -100px, 0)' }}
@@ -71,17 +71,15 @@ export default function Layout() {
             </div>
 
             {/* TopNavBar — matches Stitch exactly */}
-            <nav className="fixed top-[3px] w-full z-50 bg-[#f8f9f9]/90 backdrop-blur-sm border-b border-[#e1e3e3]">
+            <nav className="fixed top-[3px] w-full z-50 bg-[#f8f9f9]/95 backdrop-blur-sm border-b border-[#e1e3e3]">
                 <div className="flex justify-between items-center px-10 md:px-16 h-[72px] w-full max-w-screen-2xl mx-auto">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-9 h-9 border border-[#002d56]/20 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
-                                <path d="M15 85 L15 65 L45 35 L55 35 L55 85 L40 85 L40 50 L25 65 L25 85 Z" fill="#b5ccb8" opacity="0.5"/>
-                                <path d="M10 80 L10 60 L40 30 L50 30 L50 80 L35 80 L35 45 L20 60 L20 80 Z" fill="#002d56"/>
-                            </svg>
-                        </div>
-                        <span className="font-headline text-base font-bold text-[#002d56] tracking-widest uppercase">SAGE DESIGN LABS</span>
+                    <Link to="/" className="flex items-center group h-full">
+                        <img 
+                            src="/images/sage_logo_final.png" 
+                            alt="SAGE Design Labs Logo" 
+                            className="h-16 w-auto object-contain mix-blend-multiply"
+                        />
                     </Link>
 
                     {/* Nav links */}
@@ -104,7 +102,7 @@ export default function Layout() {
             </nav>
 
             {/* Page top offset for fixed nav */}
-            <div className="pt-[75px] flex-grow">
+            <div className="pt-[78px] flex-grow">
                 <Outlet />
             </div>
 

@@ -20,21 +20,19 @@ export default function HomePage() {
 
     return (
         <main className="bg-[#f8f9f9] text-[#191c1c] font-body antialiased">
-            {/* Side Coordinates — fixed left */}
-            <div className="fixed top-1/2 left-3 z-40 hidden xl:flex pointer-events-none -translate-y-1/2 flex-col items-center gap-2">
-                <div className="w-px h-12 bg-[#737780]/40"></div>
-                <div className="font-mono text-[9px] text-[#737780] rotate-90 origin-center uppercase tracking-[0.2em] whitespace-nowrap my-6">
+            {/* Side Coordinates — fixed left edge strip */}
+            <div className="fixed top-0 left-0 h-full w-6 z-30 hidden xl:flex pointer-events-none flex-col items-center justify-center overflow-hidden">
+                <span className="font-mono text-[9px] text-[#737780]/50 uppercase tracking-[0.2em] whitespace-nowrap select-none"
+                    style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
                     LAT: 40.7128° N // LNG: 74.0060° W
-                </div>
-                <div className="w-px h-12 bg-[#737780]/40"></div>
+                </span>
             </div>
-            {/* Side Coordinates — fixed right */}
-            <div className="fixed top-1/2 right-3 z-40 hidden xl:flex pointer-events-none -translate-y-1/2 flex-col items-center gap-2">
-                <div className="w-px h-12 bg-[#737780]/40"></div>
-                <div className="font-mono text-[9px] text-[#737780] -rotate-90 origin-center uppercase tracking-[0.2em] whitespace-nowrap my-6">
+            {/* Side Coordinates — fixed right edge strip */}
+            <div className="fixed top-0 right-0 h-full w-6 z-30 hidden xl:flex pointer-events-none flex-col items-center justify-center overflow-hidden">
+                <span className="font-mono text-[9px] text-[#737780]/50 uppercase tracking-[0.2em] whitespace-nowrap select-none"
+                    style={{ writingMode: 'vertical-rl' }}>
                     // SAGE_REF_0024
-                </div>
-                <div className="w-px h-12 bg-[#737780]/40"></div>
+                </span>
             </div>
 
             {/* ─── HERO ─── */}
