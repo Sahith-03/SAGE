@@ -7,7 +7,6 @@ export default function HomePage() {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -15,191 +14,229 @@ export default function HomePage() {
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-        
         return () => observer.disconnect();
     }, []);
 
     return (
-        <main className="pt-32 pb-48 bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container relative">
-            {/* Background grid */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#002d56_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none z-0"></div>
-
-            {/* Side Coordinates */}
-            <div className="fixed top-1/2 left-4 z-40 hidden xl:block pointer-events-none -translate-y-1/2">
-                <div className="font-mono text-[9px] text-outline-variant rotate-90 origin-left uppercase tracking-[0.2em] whitespace-nowrap">
-                    Lat: 40.7128° N // Lng: 74.0060° W
+        <main className="bg-[#f8f9f9] text-[#191c1c] font-body antialiased">
+            {/* Side Coordinates — fixed left */}
+            <div className="fixed top-1/2 left-3 z-40 hidden xl:flex pointer-events-none -translate-y-1/2 flex-col items-center gap-2">
+                <div className="w-px h-12 bg-[#737780]/40"></div>
+                <div className="font-mono text-[9px] text-[#737780] rotate-90 origin-center uppercase tracking-[0.2em] whitespace-nowrap my-6">
+                    LAT: 40.7128° N // LNG: 74.0060° W
                 </div>
+                <div className="w-px h-12 bg-[#737780]/40"></div>
             </div>
-            <div className="fixed top-1/2 right-4 z-40 hidden xl:block pointer-events-none -translate-y-1/2">
-                <div className="font-mono text-[9px] text-outline-variant -rotate-90 origin-right uppercase tracking-[0.2em] whitespace-nowrap">
-                    Scale: 1:500 @ A3 // SAGE_REF_0024
+            {/* Side Coordinates — fixed right */}
+            <div className="fixed top-1/2 right-3 z-40 hidden xl:flex pointer-events-none -translate-y-1/2 flex-col items-center gap-2">
+                <div className="w-px h-12 bg-[#737780]/40"></div>
+                <div className="font-mono text-[9px] text-[#737780] -rotate-90 origin-center uppercase tracking-[0.2em] whitespace-nowrap my-6">
+                    // SAGE_REF_0024
                 </div>
+                <div className="w-px h-12 bg-[#737780]/40"></div>
             </div>
 
-            {/* Hero Section */}
-            <section className="px-6 md:px-12 max-w-screen-2xl mx-auto py-24 relative z-10 min-h-[60vh] flex flex-col justify-center">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-                    <div className="lg:col-span-5 flex flex-col justify-start reveal-on-scroll">
-                        <h1 className="font-headline text-5xl md:text-6xl text-on-background tracking-tight leading-[1.1] mb-12">
-                            harmonized with <br/>organic environments.
-                        </h1>
-                        <div className="font-mono text-[10px] text-outline uppercase tracking-widest space-y-1 opacity-70">
-                            <div>Ref_01: Environmental Integration</div>
-                            <div>Ref_02: Material Circularity</div>
+            {/* ─── HERO ─── */}
+            <section className="relative w-full h-screen min-h-[600px] overflow-hidden flex flex-col">
+                {/* Full-bleed background image */}
+                <img
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2400&auto=format&fit=crop"
+                    alt="Modern sustainable architecture"
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-[#001a36]/50"></div>
+
+                {/* Hero content */}
+                <div className="relative z-10 flex flex-col justify-end h-full px-10 md:px-16 pb-20 max-w-screen-2xl mx-auto w-full">
+                    {/* Section ID tag */}
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-px bg-white/60"></div>
+                        <span className="font-mono text-[10px] text-white/60 uppercase tracking-[0.3em]">
+                            SECTION_ID: HERO_01 // PHASE: CONCEPTUALIZATION
+                        </span>
+                    </div>
+
+                    {/* Main headline */}
+                    <h1 className="font-headline text-white leading-[1.0] tracking-tight max-w-4xl">
+                        <span className="block text-5xl md:text-6xl lg:text-7xl font-normal">Designing architecture</span>
+                        <span className="block text-5xl md:text-6xl lg:text-7xl font-normal">that performs</span>
+                        <span className="block text-5xl md:text-6xl lg:text-7xl italic text-[#a4c8ff]">responsibly today</span>
+                        <span className="block text-3xl md:text-4xl lg:text-5xl font-normal uppercase tracking-widest text-white/80 mt-2">AND ENDURES MEANINGFULLY.</span>
+                    </h1>
+
+                    {/* CTA buttons row */}
+                    <div className="flex flex-wrap items-center gap-4 mt-10">
+                        <Link to="/projects" className="bg-[#002d56] text-white px-8 py-4 font-mono text-xs uppercase tracking-widest hover:bg-[#124376] transition-colors">
+                            VIEW PROJECTS
+                        </Link>
+                        <Link to="/about" className="border border-white/40 text-white px-8 py-4 font-mono text-xs uppercase tracking-widest hover:bg-white/10 transition-colors">
+                            PHILOSOPHY
+                        </Link>
+                        <div className="hidden md:flex items-center gap-6 ml-auto">
+                            <div className="text-center border border-white/20 px-4 py-2">
+                                <span className="block font-mono text-[9px] text-white/50 uppercase tracking-widest">DISCIPLINE OF</span>
+                                <span className="block font-mono text-[10px] text-white uppercase tracking-widest">DESIGN</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-1">
+                                <div className="w-px h-8 bg-white/30"></div>
+                                <span className="font-mono text-[9px] text-white/50 uppercase tracking-[0.3em] rotate-90 origin-center my-2">SCROLL</span>
+                                <div className="w-px h-8 bg-white/30"></div>
+                            </div>
                         </div>
                     </div>
-                    <div className="lg:col-span-7 flex flex-col gap-12 lg:pt-2 reveal-on-scroll" style={{ transitionDelay: '200ms' }}>
-                        <p className="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed font-light pb-12 opacity-80">
-                            ...come at the expense of ecological vitality. Our practice is rooted in a rigorous analytical approach to site, climate, and material lifecycle.
+                </div>
+            </section>
+
+            {/* ─── SAGE ETHOS ─── */}
+            <section className="bg-[#f8f9f9] px-10 md:px-16 py-24 max-w-screen-2xl mx-auto reveal-on-scroll">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    {/* Left column */}
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-8 h-px bg-[#002d56]"></div>
+                            <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-[0.3em] font-bold">THE SAGE ETHOS</span>
+                        </div>
+                        <h2 className="font-headline text-4xl md:text-5xl text-[#191c1c] leading-tight tracking-tight mb-10">
+                            Resilient structures harmonized with organic environments.
+                        </h2>
+                        <div className="font-mono text-[10px] text-[#737780] uppercase tracking-widest space-y-1">
+                            <div>REF_01: ENVIRONMENTAL INTEGRATION</div>
+                            <div>REF_02: MATERIAL CIRCULARITY</div>
+                        </div>
+                    </div>
+
+                    {/* Right column */}
+                    <div className="flex flex-col justify-center gap-8">
+                        <p className="font-body text-lg text-[#42474f] leading-relaxed">
+                            At SAGE Design Labs, we reject the notion that structural permanence must come at the expense of ecological vitality. Our practice is rooted in a rigorous analytical approach to site, climate, and material lifecycle.
                         </p>
-                        <div className="relative pl-8 py-2 border-l border-outline-variant/30">
-                            <span className="absolute -left-[3.5px] top-4 w-[8px] h-[8px] bg-[#002d56]"></span>
-                            <p className="font-body text-lg md:text-xl text-on-surface-variant leading-relaxed italic opacity-80">
+                        <div className="border-l-2 border-[#002d56] pl-6 py-1">
+                            <p className="font-body text-base text-[#42474f] leading-relaxed italic">
                                 "We view every project as a localized intervention within a broader global system. By integrating advanced sustainable technologies with timeless spatial principles, we create environments that foster human well-being."
                             </p>
                         </div>
-                        <div className="mt-8">
-                            <Link to="/about" className="inline-flex items-center gap-2 text-[#002d56] font-body text-xs font-bold uppercase tracking-[0.2em] hover:text-primary-container transition-all group">
-                                Read Full Manifesto
-                                <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-2">arrow_forward</span>
+                        <div>
+                            <Link to="/about" className="inline-flex items-center gap-2 font-mono text-[11px] text-[#002d56] uppercase tracking-widest border-b border-[#002d56] pb-px hover:opacity-70 transition-opacity">
+                                READ FULL MANIFESTO
+                                <span className="text-base">→</span>
                             </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Selected Works Section */}
-            <section className="px-6 md:px-12 max-w-screen-2xl mx-auto py-32 relative z-10 mt-12 bg-gradient-to-b from-transparent to-surface-container-lowest/50">
-                <div className="flex flex-col gap-16">
-                    <div className="flex flex-col md:flex-row justify-between items-end gap-8 reveal-on-scroll">
-                        <div>
-                            <div className="flex items-center gap-3 mb-4 opacity-70">
-                                <span className="font-mono text-[10px] uppercase tracking-widest text-[#002d56] font-bold">Selected Works</span>
-                                <span className="font-mono text-[10px] text-outline-variant">[2021-2024]</span>
-                            </div>
-                            <h2 className="font-headline text-4xl md:text-5xl text-[#002d56] tracking-tight uppercase">Built Environments</h2>
+            {/* ─── SELECTED WORKS ─── */}
+            <section className="bg-[#f0f1f1] px-10 md:px-16 py-20">
+                {/* Header row */}
+                <div className="flex items-end justify-between mb-10 max-w-screen-2xl mx-auto">
+                    <div>
+                        <div className="flex items-center gap-3 mb-3">
+                            <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-widest font-bold">SELECTED WORKS</span>
+                            <span className="font-mono text-[10px] text-[#737780]">[2021-2024]</span>
                         </div>
-                        <Link to="/projects" className="inline-flex items-center gap-2 text-[#002d56] font-body text-xs font-bold uppercase tracking-[0.2em] hover:text-primary-container transition-colors">
-                            View All Projects <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                        </Link>
+                        <h2 className="font-headline text-5xl md:text-6xl text-[#191c1c] uppercase tracking-tight">BUILT ENVIRONMENTS</h2>
+                    </div>
+                    <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-[#002d56] uppercase tracking-widest hover:opacity-70 transition-opacity">
+                        VIEW ALL PROJECTS →
+                    </Link>
+                </div>
+
+                {/* Projects grid — 2 columns: left large, right stacked */}
+                <div className="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6 reveal-on-scroll">
+                    {/* Left: Large Feature Card */}
+                    <div className="group relative overflow-hidden bg-[#191c1c]" style={{ minHeight: '580px' }}>
+                        <img
+                            src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2000&auto=format&fit=crop"
+                            alt="The Canopy House"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#001a36]/95 to-transparent p-8">
+                            <span className="font-mono text-[10px] text-white/60 uppercase tracking-widest block mb-2">RESIDENTIAL // 001</span>
+                            <h3 className="font-headline text-3xl text-white mb-3">The Canopy House</h3>
+                            <p className="font-body text-sm text-white/70 mb-5 max-w-sm leading-relaxed">
+                                A zero-emission residential retreat utilizing passive solar design and structural timber to blend into its forested site.
+                            </p>
+                            <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-white/80 uppercase tracking-widest border-b border-white/30 pb-px hover:text-white transition-colors">
+                                <span className="w-6 h-px bg-white/60"></span>
+                                EXPLORE TECHNICAL SPECS
+                            </Link>
+                        </div>
                     </div>
 
-                    {/* Projects Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mt-8">
-                        {/* Project 1 - Large */}
-                        <div className="lg:col-span-8 group cursor-pointer reveal-on-scroll">
-                            <div className="relative aspect-[16/10] overflow-hidden bg-surface-variant mb-6">
-                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop" alt="Eco-friendly modern building" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                            </div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="font-headline text-2xl text-[#002d56] mb-2 group-hover:text-primary-container transition-colors">The Seattle Pavilion</h3>
-                                    <p className="font-body text-sm text-on-surface-variant opacity-80">Sustainable Urban Extension, WA</p>
-                                </div>
-                                <span className="font-mono text-[10px] uppercase tracking-widest text-outline-variant">2024</span>
-                            </div>
-                        </div>
-
-                        {/* Project 2 - Small */}
-                        <div className="lg:col-span-4 group cursor-pointer reveal-on-scroll" style={{ transitionDelay: '150ms' }}>
-                            <div className="relative aspect-[3/4] overflow-hidden bg-surface-variant mb-6">
-                                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop" alt="Natural materials interior" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                            </div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="font-headline text-xl text-[#002d56] mb-2 group-hover:text-primary-container transition-colors">Zenith Wellness</h3>
-                                    <p className="font-body text-sm text-on-surface-variant opacity-80">Biophilic Interior, NY</p>
-                                </div>
-                                <span className="font-mono text-[10px] uppercase tracking-widest text-outline-variant">2023</span>
+                    {/* Right: 2 stacked cards */}
+                    <div className="flex flex-col gap-6">
+                        {/* Card 2 — dark with blueprint overlay */}
+                        <div className="group relative overflow-hidden bg-[#001a36]" style={{ minHeight: '278px' }}>
+                            <img
+                                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop"
+                                alt="Meridian Tower"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-30"
+                            />
+                            {/* Blueprint grid overlay */}
+                            <div className="absolute inset-0 opacity-10"
+                                style={{
+                                    backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
+                                    backgroundSize: '30px 30px'
+                                }}
+                            ></div>
+                            <div className="absolute bottom-0 left-0 p-6">
+                                <span className="font-mono text-[9px] text-[#a4c8ff]/60 uppercase tracking-widest block mb-1">SPEC_ID: CRT_88 // GL_04</span>
+                                <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">COMMERCIAL</span>
+                                <h3 className="font-headline text-2xl text-white">Meridian Tower</h3>
                             </div>
                         </div>
 
-                        {/* Project 3 - Medium */}
-                        <div className="lg:col-span-5 group cursor-pointer reveal-on-scroll" style={{ transitionDelay: '100ms' }}>
-                            <div className="relative aspect-[4/3] overflow-hidden bg-surface-variant mb-6">
-                                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop" alt="Geometric structural studies" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                        {/* Card 3 — dark healthcare */}
+                        <div className="group relative overflow-hidden bg-[#001a36]" style={{ minHeight: '278px' }}>
+                            <img
+                                src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1200&auto=format&fit=crop"
+                                alt="Oasis Wellness Pavilion"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-25"
+                            />
+                            <div className="absolute inset-0 opacity-10"
+                                style={{
+                                    backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
+                                    backgroundSize: '30px 30px'
+                                }}
+                            ></div>
+                            <div className="absolute top-2 right-3">
+                                <span className="font-mono text-[9px] text-[#ff6b6b] uppercase tracking-widest">SAGE WORK</span>
                             </div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="font-headline text-xl text-[#002d56] mb-2 group-hover:text-primary-container transition-colors">Oceanic Institute</h3>
-                                    <p className="font-body text-sm text-on-surface-variant opacity-80">Coastal Research Center, CA</p>
-                                </div>
-                                <span className="font-mono text-[10px] uppercase tracking-widest text-outline-variant">2022</span>
-                            </div>
-                        </div>
-
-                        {/* Project 4 - Medium */}
-                        <div className="lg:col-span-7 group cursor-pointer reveal-on-scroll" style={{ transitionDelay: '250ms' }}>
-                            <div className="relative aspect-[16/9] overflow-hidden bg-surface-variant mb-6">
-                                <img src="https://images.unsplash.com/photo-1613490908578-8fc525d8869c?q=80&w=2000&auto=format&fit=crop" alt="Eco residential architecture" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
-                            </div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="font-headline text-xl text-[#002d56] mb-2 group-hover:text-primary-container transition-colors">Timber Residences</h3>
-                                    <p className="font-body text-sm text-on-surface-variant opacity-80">Mass Timber Housing, OR</p>
-                                </div>
-                                <span className="font-mono text-[10px] uppercase tracking-widest text-outline-variant">2023</span>
+                            <div className="absolute bottom-0 left-0 p-6">
+                                <span className="font-mono text-[9px] text-[#a4c8ff]/60 uppercase tracking-widest block mb-1">SPEC_ID: MED_02 // BIO_19</span>
+                                <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">HEALTHCARE</span>
+                                <h3 className="font-headline text-2xl text-white">Oasis Wellness Pavilion</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Interactive Projects Map */}
-            <section className="px-6 md:px-12 max-w-screen-2xl mx-auto py-24 relative z-10 border-t border-outline-variant/20">
-                <div className="flex flex-col items-center gap-12 reveal-on-scroll">
-                    <div className="text-center">
-                        <h3 className="font-headline text-3xl md:text-4xl text-[#002d56] tracking-tight mb-4">Global Operations</h3>
-                        <p className="font-body text-on-surface-variant max-w-xl mx-auto opacity-80">Explore our localized interventions across the world map. Click on active coordinates to view project details.</p>
-                    </div>
-
-                    <div className="relative w-full max-w-4xl aspect-[2/1] bg-surface-variant/30 border border-outline-variant/30 overflow-hidden flex items-center justify-center p-8 group">
-                        {/* Map Grid Background */}
-                        <div className="absolute inset-0 blueprint-grid-fine opacity-20"></div>
-
-                        {/* Abstract World Map SVG */}
-                        <svg className="w-full h-full text-[#002d56]/10" viewBox="0 0 800 400" fill="currentColor">
-                            <path d="M100 150 Q120 120 150 140 T200 120 T250 160 T300 130 T350 170 T400 120 T450 140 T500 100 T550 130 T600 120 T650 160 T700 140 L700 250 Q650 220 600 240 T550 280 T500 250 T450 290 T400 240 T350 260 T300 220 T250 250 T200 240 T150 280 T100 260 Z" />
-                        </svg>
-
-                        {/* Interactive Project Dots */}
-                        {/* Project 1 */}
-                        <div className="absolute top-[35%] left-[25%] group/dot cursor-pointer">
-                            <div className="w-4 h-4 bg-[#002d56] rounded-full animate-pulse opacity-50 absolute -inset-1"></div>
-                            <div className="w-2 h-2 bg-[#002d56] rounded-full relative"></div>
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur border border-[#002d56]/20 p-2 text-center opacity-0 group-hover/dot:opacity-100 transition-opacity w-32 pointer-events-none">
-                                <span className="block text-[8px] font-mono text-[#002d56] uppercase">Active</span>
-                                <span className="block text-xs font-headline font-bold text-[#002d56]">Seattle Pavilion</span>
-                            </div>
-                        </div>
-
-                        {/* Project 2 */}
-                        <div className="absolute top-[45%] left-[60%] group/dot cursor-pointer">
-                            <div className="w-4 h-4 bg-[#002d56] rounded-full animate-pulse opacity-50 absolute -inset-1"></div>
-                            <div className="w-2 h-2 bg-[#002d56] rounded-full relative"></div>
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur border border-[#002d56]/20 p-2 text-center opacity-0 group-hover/dot:opacity-100 transition-opacity w-32 pointer-events-none">
-                                <span className="block text-[8px] font-mono text-[#002d56] uppercase">Completed</span>
-                                <span className="block text-xs font-headline font-bold text-[#002d56]">Zenith Wellness</span>
-                            </div>
-                        </div>
-
-                        {/* Project 3 */}
-                        <div className="absolute top-[65%] left-[75%] group/dot cursor-pointer">
-                            <div className="w-4 h-4 bg-[#002d56] rounded-full animate-pulse opacity-50 absolute -inset-1"></div>
-                            <div className="w-2 h-2 bg-[#002d56] rounded-full relative"></div>
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur border border-[#002d56]/20 p-2 text-center opacity-0 group-hover/dot:opacity-100 transition-opacity w-32 pointer-events-none">
-                                <span className="block text-[8px] font-mono text-[#002d56] uppercase">In Planning</span>
-                                <span className="block text-xs font-headline font-bold text-[#002d56]">Oceanic Institute</span>
-                            </div>
-                        </div>
-                    </div>
+            {/* ─── CTA SECTION ─── */}
+            <section className="bg-[#f8f9f9] py-32 px-10 md:px-16 flex flex-col items-center text-center reveal-on-scroll">
+                {/* Compass icon */}
+                <div className="mb-4">
+                    <span className="font-mono text-[9px] text-[#737780] uppercase tracking-widest block mb-3">REF: CTA_77</span>
+                    <svg width="40" height="48" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
+                        <circle cx="20" cy="14" r="8" stroke="#002d56" strokeWidth="1.5" fill="none"/>
+                        <line x1="20" y1="22" x2="20" y2="48" stroke="#002d56" strokeWidth="1.5"/>
+                        <line x1="8" y1="42" x2="20" y2="48" stroke="#002d56" strokeWidth="1.5"/>
+                        <line x1="32" y1="42" x2="20" y2="48" stroke="#002d56" strokeWidth="1.5"/>
+                    </svg>
                 </div>
+
+                <h2 className="font-headline text-5xl md:text-6xl lg:text-7xl text-[#002d56] tracking-tight max-w-3xl leading-tight mb-8">
+                    READY TO <strong>BUILD</strong> THE FUTURE?
+                </h2>
+                <p className="font-body text-lg text-[#42474f] max-w-xl mb-10 leading-relaxed">
+                    Collaborate with SAGE Design Labs to realize architectural visions that are sustainable, structurally profound, and meticulously crafted.
+                </p>
+                <Link to="/contact" className="bg-[#002d56] text-white px-12 py-5 font-mono text-xs uppercase tracking-widest hover:bg-[#124376] transition-colors mb-4">
+                    INITIATE A CONSULTATION
+                </Link>
+                <span className="font-mono text-[10px] text-[#737780] uppercase tracking-widest">ESTIMATED TAT: 48 HOURS // GLOBAL OPS</span>
             </section>
         </main>
     );

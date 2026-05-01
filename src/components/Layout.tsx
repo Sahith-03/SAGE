@@ -63,70 +63,70 @@ export default function Layout() {
             </div>
 
             {/* Scroll Progress Bar */}
-            <div className="fixed top-0 left-0 h-1 bg-outline-variant/30 w-full z-[100]">
-                <div 
-                    className="h-full bg-[#002d56]" 
+            <div className="fixed top-0 left-0 h-[3px] bg-[#e1e3e3] w-full z-[100]">
+                <div
+                    className="h-full bg-[#002d56] transition-none"
                     style={{ width: `${scrollProgress}%` }}
                 ></div>
             </div>
 
-            {/* TopNavBar */}
-            <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/20 mt-1">
-                <div className="flex justify-between items-center px-6 md:px-12 h-24 w-full max-w-[1920px] mx-auto">
-                    <Link to="/" className="flex items-center gap-4 group">
-                        {/* Custom SAGE Logo Graphic */}
-                        <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform group-hover:scale-105 transition-transform">
-                            {/* Drop shadow shape */}
-                            <path d="M15 85 L15 65 L45 35 L55 35 L55 85 L40 85 L40 50 L25 65 L25 85 Z" fill="#b5ccb8" opacity="0.6"/>
-                            {/* Main blue shape */}
-                            <path d="M10 80 L10 60 L40 30 L50 30 L50 80 L35 80 L35 45 L20 60 L20 80 Z" fill="#002d56"/>
-                        </svg>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-headline font-normal text-[#002d56] tracking-widest leading-none">SAGE</span>
-                            <span className="text-[10px] font-sans text-[#002d56] tracking-[0.3em] font-light leading-none mt-1">Design labs</span>
+            {/* TopNavBar — matches Stitch exactly */}
+            <nav className="fixed top-[3px] w-full z-50 bg-[#f8f9f9]/90 backdrop-blur-sm border-b border-[#e1e3e3]">
+                <div className="flex justify-between items-center px-10 md:px-16 h-[72px] w-full max-w-screen-2xl mx-auto">
+                    {/* Logo */}
+                    <Link to="/" className="flex items-center gap-3 group">
+                        <div className="w-9 h-9 border border-[#002d56]/20 flex items-center justify-center">
+                            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+                                <path d="M15 85 L15 65 L45 35 L55 35 L55 85 L40 85 L40 50 L25 65 L25 85 Z" fill="#b5ccb8" opacity="0.5"/>
+                                <path d="M10 80 L10 60 L40 30 L50 30 L50 80 L35 80 L35 45 L20 60 L20 80 Z" fill="#002d56"/>
+                            </svg>
                         </div>
+                        <span className="font-headline text-base font-bold text-[#002d56] tracking-widest uppercase">SAGE DESIGN LABS</span>
                     </Link>
-                    <div className="hidden lg:flex space-x-8 font-sans uppercase tracking-[0.1em] text-xs font-bold text-outline">
-                        <Link to="/" className="text-[#002d56] border-b-2 border-[#002d56] pb-1 hover:text-[#002d56] transition-colors">Home</Link>
-                        <Link to="/about" className="hover:text-[#002d56] transition-colors">About</Link>
-                        <Link to="/projects" className="hover:text-[#002d56] transition-colors">Projects</Link>
-                        <Link to="/team" className="hover:text-[#002d56] transition-colors">Team</Link>
-                        <Link to="/contact" className="hover:text-[#002d56] transition-colors">Contact</Link>
+
+                    {/* Nav links */}
+                    <div className="hidden lg:flex items-center gap-10 font-mono text-[11px] text-[#42474f] uppercase tracking-widest">
+                        <Link to="/" className="text-[#002d56] border-b-2 border-[#002d56] pb-0.5 hover:opacity-70 transition-opacity">HOME</Link>
+                        <Link to="/about" className="hover:text-[#002d56] transition-colors">ABOUT</Link>
+                        <Link to="/projects" className="hover:text-[#002d56] transition-colors">PROJECTS</Link>
+                        <Link to="/team" className="hover:text-[#002d56] transition-colors">TEAM</Link>
+                        <Link to="/contact" className="hover:text-[#002d56] transition-colors">CONTACT</Link>
                     </div>
-                    <button className="hidden md:block bg-[#002d56] text-white px-6 py-3 font-sans uppercase tracking-widest text-xs font-bold hover:bg-[#124376] transition-all duration-300 rounded-sm shadow-md">
-                        Start a Project
-                    </button>
+
+                    {/* CTA button */}
+                    <Link to="/contact" className="hidden md:block bg-[#002d56] text-white px-6 py-3 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors">
+                        START A PROJECT
+                    </Link>
                     <div className="lg:hidden text-[#002d56]">
-                        <span className="material-symbols-outlined text-3xl">menu</span>
+                        <span className="material-symbols-outlined text-2xl">menu</span>
                     </div>
                 </div>
             </nav>
 
-            <div className="flex-grow">
+            {/* Page top offset for fixed nav */}
+            <div className="pt-[75px] flex-grow">
                 <Outlet />
             </div>
 
-            {/* Footer */}
-            <footer className="w-full py-16 bg-[#edeeee] dark:bg-slate-950 border-t border-outline-variant relative">
-                <div className="max-w-7xl mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div className="col-span-1 md:col-span-2">
-                        <div className="flex items-center gap-2 mb-6">
-                            <div className="w-6 h-6 bg-primary"></div>
-                            <div className="font-serif text-lg italic text-[#002d56] dark:text-white">SAGE Design Labs</div>
-                        </div>
-                        <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#4e6353] dark:text-[#d1e9d4] leading-loose max-w-sm">
-                            © 2024 SAGE Design Labs. Spec document 88-v2. Resilient structures harmonized with organic environments.
+            {/* Footer — matches Stitch */}
+            <footer className="bg-[#d9dada] border-t border-[#c3c6d1]">
+                <div className="max-w-screen-2xl mx-auto px-10 md:px-16 py-10 flex flex-col md:flex-row items-start justify-between gap-8">
+                    {/* Left */}
+                    <div>
+                        <div className="font-headline text-2xl text-[#002d56] uppercase tracking-widest font-bold mb-3">SAGE</div>
+                        <p className="font-mono text-[10px] text-[#42474f] uppercase tracking-widest leading-relaxed max-w-xs">
+                            © 2024 SAGE DESIGN LABS.<br />
+                            RESILIENT STRUCTURES HARMONIZED WITH<br />
+                            ORGANIC ENVIRONMENTS.
                         </p>
+                        <p className="font-mono text-[10px] text-[#737780] uppercase tracking-widest mt-3">V.2.4.0_STABLE // BUILD_ARCHITERRA</p>
                     </div>
-                    <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-end space-y-4 md:space-y-0 md:space-x-12">
-                        <div className="flex flex-col space-y-4 font-sans text-[10px] tracking-[0.2em] uppercase">
-                            <Link to="#" className="text-slate-500 hover:text-[#002d56] transition-colors">Sustainability Report</Link>
-                            <Link to="#" className="text-slate-500 hover:text-[#002d56] transition-colors">Privacy</Link>
-                        </div>
-                        <div className="flex flex-col space-y-4 font-sans text-[10px] tracking-[0.2em] uppercase">
-                            <Link to="#" className="text-slate-500 hover:text-[#002d56] transition-colors">Press Kit</Link>
-                            <Link to="#" className="text-slate-500 hover:text-[#002d56] transition-colors">Careers</Link>
-                        </div>
+                    {/* Right links */}
+                    <div className="flex flex-wrap gap-x-10 gap-y-2 font-mono text-[10px] text-[#42474f] uppercase tracking-widest">
+                        <Link to="#" className="hover:text-[#002d56] transition-colors">SUSTAINABILITY_REPORT.PDF</Link>
+                        <Link to="#" className="hover:text-[#002d56] transition-colors">PRIVACY_POLICY</Link>
+                        <Link to="#" className="hover:text-[#002d56] transition-colors">PRESS_KIT</Link>
+                        <Link to="#" className="hover:text-[#002d56] transition-colors">CAREERS.EXE</Link>
                     </div>
                 </div>
             </footer>
