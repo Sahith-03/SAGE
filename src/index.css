@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .text-shadow-lg { text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08); }
+    
+    .blueprint-bg {
+        background-image: 
+            linear-gradient(to right, rgba(0, 45, 86, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 45, 86, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .blueprint-grid-fine {
+        background-image: 
+            linear-gradient(to right, rgba(0, 45, 86, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 45, 86, 0.05) 1px, transparent 1px);
+        background-size: 10px 10px;
+    }
+
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .blueprint-reveal::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+        background-size: 20px 20px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 10;
+        pointer-events: none;
+    }
+    
+    /* We can't use .group:hover .blueprint-reveal directly in @layer utilities if it's complex, 
+       but standard CSS works */
+}
+
+.group:hover .blueprint-reveal::before {
+    opacity: 1;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.scanline {
+    display: none;
+}
+
+.group:hover .scanline {
+    display: block;
+    animation: scan 2s linear infinite;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

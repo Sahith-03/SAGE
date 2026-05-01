@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAGE Design Labs - Projects Portfolio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c3c6d1",
+                    "inverse-surface": "#2e3131",
+                    "secondary-fixed": "#d1e9d4",
+                    "on-secondary-fixed": "#0c1f13",
+                    "inverse-primary": "#a4c8ff",
+                    "on-tertiary-container": "#a5b2a5",
+                    "tertiary-fixed-dim": "#bdcabc",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9f9",
+                    "on-primary-fixed-variant": "#19487b",
+                    "surface-tint": "#366094",
+                    "primary-fixed": "#d4e3ff",
+                    "tertiary-container": "#39453b",
+                    "tertiary": "#232f25",
+                    "surface-container-low": "#f3f4f4",
+                    "on-surface": "#191c1c",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e7e8e8",
+                    "secondary-fixed-dim": "#b5ccb8",
+                    "on-surface-variant": "#42474f",
+                    "secondary-container": "#d1e9d4",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f8f9f9",
+                    "on-secondary-fixed-variant": "#374b3c",
+                    "surface-dim": "#d9dada",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e1e3e3",
+                    "primary-fixed-dim": "#a4c8ff",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9f9",
+                    "surface-variant": "#e1e3e3",
+                    "surface-container": "#edeeee",
+                    "on-error-container": "#93000a",
+                    "primary": "#002d56",
+                    "outline": "#737780",
+                    "tertiary-fixed": "#d9e6d8",
+                    "secondary": "#4e6353",
+                    "on-secondary-container": "#546959",
+                    "on-tertiary-fixed": "#131e15",
+                    "on-background": "#191c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#3e4a3f",
+                    "on-primary-fixed": "#001c3a",
+                    "on-primary-container": "#89b1eb",
+                    "primary-container": "#124376"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            },
+            "animation": {
+                "reveal": "reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards",
+                "float": "float 6s ease-in-out infinite"
+            },
+            "keyframes": {
+                "reveal": {
+                    "0%": { transform: "translateY(100%)", clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+                    "100%": { transform: "translateY(0)", clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }
+                },
+                "float": {
+                    "0%, 100%": { transform: "translateY(0)" },
+                    "50%": { transform: "translateY(-10px)" }
+                }
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+            background-size: 32px 32px;
+        }
+        .unfold-mask {
+            clip-path: inset(100% 0 0 0);
+            transition: clip-path 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .is-visible .unfold-mask {
+            clip-path: inset(0 0 0 0);
+        }
+        .technical-line {
+            position: absolute;
+            background: theme('colors.primary');
+            opacity: 0.2;
+        }
+        .hover-blueprint {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-image: 
+                linear-gradient(rgba(0,45,86,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,45,86,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .group:hover .hover-blueprint {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased blueprint-grid selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 backdrop-blur-lg border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-12 h-24 w-full">
+<a class="text-2xl font-serif font-black text-[#002d56] uppercase tracking-tight" href="#">
+            SAGE Design Labs
+        </a>
+<div class="hidden md:flex space-x-12 items-center">
+<a class="text-slate-500 font-medium hover:text-[#4e6353] transition-all uppercase tracking-widest text-[10px]" href="#">Home</a>
+<a class="text-slate-500 font-medium hover:text-[#4e6353] transition-all uppercase tracking-widest text-[10px]" href="#">About</a>
+<a aria-current="page" class="text-[#002d56] font-bold border-b border-[#002d56] pb-1 uppercase tracking-widest text-[10px]" href="#">Projects</a>
+<a class="text-slate-500 font-medium hover:text-[#4e6353] transition-all uppercase tracking-widest text-[10px]" href="#">Team</a>
+<a class="text-slate-500 font-medium hover:text-[#4e6353] transition-all uppercase tracking-widest text-[10px]" href="#">Contact</a>
+</div>
+<div class="hidden md:block">
+<a class="inline-block bg-[#002d56] text-white px-8 py-3 uppercase tracking-widest text-[10px] hover:bg-[#124376] transition-all rounded-sm" href="#">
+                Start a Project
+            </a>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-[#002d56] text-3xl">menu</span>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-48">
+<!-- Hero Section -->
+<section class="px-6 md:px-12 max-w-screen-2xl mx-auto py-24 mb-32">
+<div class="flex flex-col md:flex-row items-end gap-12">
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-[1px] w-12 bg-primary"></div>
+<span class="text-xs uppercase tracking-[0.4em] text-secondary font-bold">Archives v2.04</span>
+</div>
+<h1 class="font-headline text-6xl md:text-8xl lg:text-[10rem] text-primary tracking-tighter leading-[0.9] mb-12">
+                    Future <br/><span class="italic text-outline">Structures.</span>
+</h1>
+</div>
+<div class="max-w-sm pb-8">
+<p class="font-body text-base text-on-surface-variant leading-relaxed mb-6 border-l border-primary/20 pl-6">
+                    Documentation of spatial logic and material endurance. Our portfolio serves as a technical legend for sustainable living.
+                </p>
+<div class="flex gap-4">
+<span class="text-[10px] font-mono text-outline-variant">COORD: 34.0522° N</span>
+<span class="text-[10px] font-mono text-outline-variant">SYSTEM: RE-BIOPHILIC</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Filter (Legend) -->
+<section class="px-6 md:px-12 max-w-screen-2xl mx-auto mb-24">
+<div class="border border-outline-variant/40 bg-white/40 backdrop-blur-sm p-4 md:p-8 rounded-sm">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+<div class="space-y-4">
+<span class="text-[10px] uppercase tracking-widest text-primary font-bold block mb-4">Legend.Filter</span>
+<button class="flex items-center gap-3 w-full group text-primary">
+<div class="w-3 h-3 border border-primary bg-primary"></div>
+<span class="text-xs uppercase tracking-wider font-medium">All Projects</span>
+</button>
+</div>
+<div class="space-y-4 pt-8 md:pt-0">
+<span class="text-[10px] uppercase tracking-widest text-secondary block mb-4 opacity-50">S_TYPE</span>
+<button class="flex items-center gap-3 w-full group hover:text-primary transition-colors">
+<div class="w-3 h-3 border border-outline-variant group-hover:border-primary"></div>
+<span class="text-xs uppercase tracking-wider">Residential</span>
+</button>
+<button class="flex items-center gap-3 w-full group hover:text-primary transition-colors">
+<div class="w-3 h-3 border border-outline-variant group-hover:border-primary"></div>
+<span class="text-xs uppercase tracking-wider">Commercial</span>
+</button>
+</div>
+<div class="space-y-4 pt-8 md:pt-0">
+<span class="text-[10px] uppercase tracking-widest text-secondary block mb-4 opacity-50">M_BASE</span>
+<button class="flex items-center gap-3 w-full group hover:text-primary transition-colors">
+<div class="w-3 h-3 border border-outline-variant group-hover:border-primary"></div>
+<span class="text-xs uppercase tracking-wider">Monolith Concrete</span>
+</button>
+<button class="flex items-center gap-3 w-full group hover:text-primary transition-colors">
+<div class="w-3 h-3 border border-outline-variant group-hover:border-primary"></div>
+<span class="text-xs uppercase tracking-wider">Biophilic Timber</span>
+</button>
+</div>
+<div class="hidden md:block col-span-2 text-right">
+<div class="inline-block text-left">
+<span class="text-[10px] uppercase tracking-widest text-secondary block mb-4 opacity-50">STATUS</span>
+<div class="flex items-center gap-6">
+<div class="text-center">
+<span class="block text-xl font-headline text-primary">24</span>
+<span class="text-[8px] uppercase text-outline">Realized</span>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant/30"></div>
+<div class="text-center">
+<span class="block text-xl font-headline text-primary">12</span>
+<span class="text-[8px] uppercase text-outline">In Planning</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Asymmetrical Interactive Gallery -->
+<section class="px-6 md:px-12 max-w-screen-2xl mx-auto space-y-48 md:space-y-72">
+<!-- Project 01: The Glass Pavilion -->
+<div class="project-card reveal-on-scroll grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+<div class="md:col-span-7 relative group">
+<!-- Measurement Labels -->
+<div class="absolute -top-6 left-0 text-[10px] font-mono text-outline-variant uppercase">Width: 24.5m // Axis_A</div>
+<div class="absolute -left-6 top-1/2 -rotate-90 text-[10px] font-mono text-outline-variant uppercase origin-left">Elev: +12.4m</div>
+<div class="unfold-mask overflow-hidden bg-surface-container shadow-2xl relative">
+<img alt="Modern monolithic concrete residential home" class="w-full aspect-[4/3] object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop"/>
+<!-- Interactive Floorplan Overlay -->
+<div class="hover-blueprint absolute inset-0 flex items-center justify-center p-12 pointer-events-none">
+<svg class="w-full h-full text-primary/40" fill="none" stroke="currentColor" stroke-width="0.1" viewbox="0 0 100 100">
+<rect height="60" width="80" x="10" y="10"></rect>
+<path d="M10 40 L90 40 M40 10 L40 70" stroke-dasharray="2 2"></path>
+<circle cx="50" cy="40" r="5"></circle>
+</svg>
+<div class="absolute bottom-12 left-12 bg-white/80 backdrop-blur p-4 text-[10px] font-mono leading-none border border-primary/20">
+                            SECTION_01: RESIDENCE_WING<br/>
+                            MAT: POURED_CONCRETE_70%<br/>
+                            MAT: LOW_E_GLASS_30%
+                        </div>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 md:pt-24">
+<span class="text-xs font-bold text-primary uppercase tracking-[0.4em] mb-4 block">Residential . 01</span>
+<h2 class="font-headline text-4xl md:text-6xl text-primary mb-8 tracking-tight">The Glass <br/>Pavilion</h2>
+<p class="text-on-surface-variant max-w-sm mb-12 leading-relaxed">
+                    A structural dialogue between density and transparency. Deep-poured concrete forms provide thermal mass, while expansive glass apertures invite the forest into the domestic sphere.
+                </p>
+<div class="space-y-4">
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-[10px] uppercase text-outline">Location</span>
+<span class="text-[10px] font-bold uppercase text-primary">Pacific Northwest</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-[10px] uppercase text-outline">Scale</span>
+<span class="text-[10px] font-bold uppercase text-primary">3,200 SQ FT</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-[10px] uppercase text-outline">Logic</span>
+<span class="text-[10px] font-bold uppercase text-primary">Monolithic / Fluid</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 02: Apex Tower (Asymmetric Right) -->
+<div class="project-card reveal-on-scroll grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-4 order-2 md:order-1">
+<div class="bg-primary/5 p-12 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-6xl">architecture</span>
+</div>
+<span class="text-[10px] font-mono text-primary/50 block mb-2">REF: COMM_778</span>
+<h3 class="font-headline text-3xl text-primary mb-6">Vertical <br/>Metabolism</h3>
+<p class="text-sm text-on-surface-variant mb-8 leading-relaxed">
+                        A skyscraper that functions as a living organism. Vertical gardens act as air filtration lungs for the urban core.
+                    </p>
+<a class="text-[10px] uppercase font-bold tracking-widest text-primary border-b-2 border-primary pb-1 inline-block hover:bg-primary hover:text-white transition-all px-2" href="#">View Data Sheet</a>
+</div>
+</div>
+<div class="md:col-span-8 order-1 md:order-2 relative group">
+<div class="unfold-mask overflow-hidden bg-surface-container-high shadow-2xl">
+<img alt="Futuristic sustainable office building" class="w-full aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-1000" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop"/>
+</div>
+<!-- Callout Node -->
+<div class="absolute top-1/4 right-1/4 flex flex-col items-center">
+<div class="w-4 h-4 rounded-full border border-primary bg-white flex items-center justify-center animate-ping"></div>
+<div class="h-12 w-[1px] bg-primary"></div>
+<div class="bg-white/90 backdrop-blur p-3 border border-primary/20 text-[8px] uppercase tracking-tighter">
+                        Active Biowall: Hydroponic System
+                    </div>
+</div>
+</div>
+</div>
+<!-- Project 03: Zenith Wellness (Wide) -->
+<div class="project-card reveal-on-scroll space-y-12">
+<div class="relative group">
+<div class="absolute inset-0 bg-primary/10 translate-x-4 translate-y-4 -z-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700"></div>
+<div class="unfold-mask overflow-hidden bg-surface-container aspect-[21/9]">
+<img alt="Healthcare facility biophilic design" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb65?q=80&w=2000&auto=format&fit=crop"/>
+</div>
+<div class="absolute bottom-8 left-8 right-8 flex justify-between items-end pointer-events-none">
+<div class="bg-white/80 backdrop-blur-xl p-10 max-w-lg pointer-events-auto shadow-xl">
+<span class="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-4 block">Healthcare . 03</span>
+<h2 class="font-headline text-5xl text-primary mb-4 tracking-tight">Zenith <br/>Wellness Center</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Architecture as a therapeutic instrument. We utilized local cedar laths and rhythmic courtyard spacing to lower patient cortisol levels through visual harmony.</p>
+</div>
+<div class="hidden md:block pointer-events-auto">
+<button class="w-24 h-24 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all group/btn">
+<span class="material-symbols-outlined transition-transform group-hover/btn:rotate-45">arrow_outward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interior Highlights Section (Daring Grid) -->
+<section class="mt-48 py-48 bg-primary text-white">
+<div class="px-6 md:px-12 max-w-screen-2xl mx-auto">
+<div class="flex items-baseline gap-8 mb-32">
+<h2 class="font-headline text-5xl md:text-8xl tracking-tight">The Inner <br/>Workings.</h2>
+<span class="text-[10px] font-mono uppercase opacity-40">Series_B: Spatial Harmony</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-24 items-end">
+<!-- Interior 01 -->
+<div class="space-y-8 group">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img alt="Brutalist Interior" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2000&auto=format&fit=crop"/>
+<img alt="Minimalist interior" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2000&auto=format&fit=crop"/>
+</div>
+<div>
+<span class="text-[10px] font-mono block mb-2 opacity-50">RES_INT_402</span>
+<h4 class="text-xl font-headline italic">Brutalist Warmth</h4>
+</div>
+</div>
+<!-- Interior 02 (Offset higher) -->
+<div class="space-y-8 group -mb-32">
+<div class="relative overflow-hidden aspect-[4/5]">
+<img alt="Corporate Lobby" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2000&auto=format&fit=crop"/>
+</div>
+<div>
+<span class="text-[10px] font-mono block mb-2 opacity-50">COMM_INT_112</span>
+<h4 class="text-xl font-headline italic">Monolith Foyer</h4>
+</div>
+</div>
+<!-- Interior 03 -->
+<div class="space-y-8 group">
+<div class="relative overflow-hidden aspect-square">
+<img alt="Eco-Lodge Interior" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?q=80&w=2000&auto=format&fit=crop"/>
+</div>
+<div>
+<span class="text-[10px] font-mono block mb-2 opacity-50">HOSP_INT_904</span>
+<h4 class="text-xl font-headline italic">Eco-Lodge Retreat</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTW Section -->
+<section class="py-48 px-6 md:px-12 text-center max-w-4xl mx-auto">
+<h2 class="font-headline text-4xl md:text-6xl text-primary mb-12 tracking-tight">Ready to deconstruct the ordinary?</h2>
+<a class="inline-flex items-center gap-6 group" href="#">
+<span class="text-xs uppercase font-bold tracking-[0.5em] text-primary">Collaborate With Us</span>
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">arrow_right_alt</span>
+</div>
+</a>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-highest border-t border-outline-variant/30 py-24 px-12">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+<div class="col-span-1 md:col-span-2">
+<div class="text-2xl font-serif font-black text-primary uppercase tracking-tight mb-8">SAGE Design Labs</div>
+<p class="text-on-surface-variant max-w-sm text-sm leading-relaxed mb-8 opacity-60 italic">
+                    "Precision is the byproduct of listening to the site."
+                </p>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"><span class="text-xs font-serif italic">In</span></div>
+<div class="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"><span class="text-xs font-serif italic">Be</span></div>
+<div class="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer"><span class="text-xs font-serif italic">Dr</span></div>
+</div>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary block mb-6">Explore</span>
+<ul class="space-y-4 text-[10px] uppercase tracking-widest text-secondary font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Architecture</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Interiors</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary block mb-6">Archives</span>
+<ul class="space-y-4 text-[10px] uppercase tracking-widest text-secondary font-medium">
+<li><a class="hover:text-primary transition-colors" href="#">Press Kit</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Methodology</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-outline-variant/30 gap-8">
+<p class="text-[10px] uppercase tracking-widest text-outline">© 2024 SAGE Design Labs. All Rights Reserved.</p>
+<p class="text-[10px] uppercase tracking-widest text-outline">Design Philosophy: Functional Brutalism</p>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for the 'unfolding' effect
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+</body></html>

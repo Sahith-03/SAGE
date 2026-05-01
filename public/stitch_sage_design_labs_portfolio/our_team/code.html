@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAGE Design Labs | The Minds at SAGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c6d1",
+                        "inverse-surface": "#2e3131",
+                        "secondary-fixed": "#d1e9d4",
+                        "on-secondary-fixed": "#0c1f13",
+                        "inverse-primary": "#a4c8ff",
+                        "on-tertiary-container": "#a5b2a5",
+                        "tertiary-fixed-dim": "#bdcabc",
+                        "error": "#ba1a1a",
+                        "surface": "#f8f9f9",
+                        "on-primary-fixed-variant": "#19487b",
+                        "surface-tint": "#366094",
+                        "primary-fixed": "#d4e3ff",
+                        "tertiary-container": "#39453b",
+                        "tertiary": "#232f25",
+                        "surface-container-low": "#f3f4f4",
+                        "on-surface": "#191c1c",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8e8",
+                        "secondary-fixed-dim": "#b5ccb8",
+                        "on-surface-variant": "#42474f",
+                        "secondary-container": "#d1e9d4",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9f9",
+                        "on-secondary-fixed-variant": "#374b3c",
+                        "surface-dim": "#d9dada",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e1e3e3",
+                        "primary-fixed-dim": "#a4c8ff",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9f9",
+                        "surface-variant": "#e1e3e3",
+                        "surface-container": "#edeeee",
+                        "on-error-container": "#93000a",
+                        "primary": "#002d56",
+                        "outline": "#737780",
+                        "tertiary-fixed": "#d9e6d8",
+                        "secondary": "#4e6353",
+                        "on-secondary-container": "#546959",
+                        "on-tertiary-fixed": "#131e15",
+                        "on-background": "#191c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed-variant": "#3e4a3f",
+                        "on-primary-fixed": "#001c3a",
+                        "on-primary-container": "#89b1eb",
+                        "primary-container": "#124376"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: radial-gradient(circle, #e1e3e3 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .phi-popover {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            pointer-events: none;
+        }
+        .phi-trigger:hover + .phi-popover, .phi-popover:hover {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-slate-950/60 backdrop-blur-lg shadow-[0_20px_40px_rgba(25,28,28,0.06)] flex justify-between items-center px-12 h-24">
+<a class="text-2xl font-headline font-black text-primary uppercase" href="#">SAGE Design Labs</a>
+<nav class="hidden md:flex gap-8">
+<a class="font-body uppercase tracking-widest text-xs text-slate-500 font-medium hover:text-secondary transition-all duration-300" href="#">Home</a>
+<a class="font-body uppercase tracking-widest text-xs text-slate-500 font-medium hover:text-secondary transition-all duration-300" href="#">About</a>
+<a class="font-body uppercase tracking-widest text-xs text-slate-500 font-medium hover:text-secondary transition-all duration-300" href="#">Projects</a>
+<a class="font-body uppercase tracking-widest text-xs text-primary font-bold border-b-2 border-secondary pb-1 hover:text-secondary transition-all duration-300" href="#">Team</a>
+<a class="font-body uppercase tracking-widest text-xs text-slate-500 font-medium hover:text-secondary transition-all duration-300" href="#">Contact</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-md font-label uppercase tracking-widest text-xs hover:bg-primary-container transition-all shadow-[0_12px_24px_rgba(25,28,28,0.06)] scale-95 duration-200 ease-in-out hidden md:block">
+        Start a Project
+    </button>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="menu">menu</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-40 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto w-full blueprint-grid">
+<!-- Hero Section -->
+<section class="mb-32 max-w-4xl">
+<div class="inline-flex items-center gap-2 mb-6">
+<span class="h-px w-12 bg-primary"></span>
+<span class="font-label uppercase tracking-[0.3em] text-[10px] text-primary font-bold">Collaborative Intelligence</span>
+</div>
+<h1 class="font-headline text-5xl md:text-8xl font-light text-primary tracking-tight mb-8">The Minds at <span class="italic">SAGE</span></h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed font-light max-w-2xl border-l-2 border-primary-container pl-8">
+            A collective of visionary architects and designers dedicated to harmonizing resilient structures with organic environments.
+        </p>
+</section>
+<!-- Founder Section (Interactive) -->
+<section class="mb-48 relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Left: Portrait & Technical Info -->
+<div class="lg:col-span-5 space-y-8">
+<div class="relative group aspect-[4/5] overflow-hidden bg-surface-container-highest">
+<img alt="Ar. Nerella Manoj Vamsi" class="w-full h-full object-cover grayscale brightness-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop"/>
+<!-- Technical Overlay -->
+<div class="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
+<div class="absolute top-8 left-8 bg-primary/90 text-on-primary px-4 py-1 text-[10px] uppercase tracking-widest font-bold">Lead 01.A</div>
+</div>
+<div class="grid grid-cols-2 gap-px bg-outline-variant">
+<div class="bg-surface p-6">
+<span class="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Design Focus</span>
+<span class="font-label text-xs font-bold text-primary">Bioclimatic Performance</span>
+</div>
+<div class="bg-surface p-6">
+<span class="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Material Core</span>
+<span class="font-label text-xs font-bold text-primary">Carbon-Negative Concrete</span>
+</div>
+</div>
+</div>
+<!-- Right: Bio & Interactive Popover -->
+<div class="lg:col-span-7 pt-12">
+<div class="max-w-xl">
+<span class="font-label uppercase tracking-[0.4em] text-[10px] text-secondary font-black block mb-4">Founder &amp; Principal Architect</span>
+<h2 class="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Ar. Nerella Manoj Vamsi</h2>
+<div class="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
+<p>
+                            Manoj Vamsi leads SAGE with a singular vision: to create architecture that doesn't just occupy space, but elevates it. His approach merges rigorous technical performance with profound environmental sensitivity.
+                        </p>
+<div class="relative inline-block group">
+<button class="phi-trigger flex items-center gap-4 text-primary font-bold uppercase tracking-widest text-xs border-b border-primary pb-2 hover:text-secondary transition-colors group">
+<span>Design Philosophy</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="add">add</span>
+</button>
+<!-- Philosophy Pop-over -->
+<div class="phi-popover absolute left-0 top-full mt-4 w-80 bg-inverse-surface text-inverse-on-surface p-8 shadow-2xl z-20">
+<h4 class="font-headline text-lg italic mb-4">"The Resilient Void"</h4>
+<p class="text-xs leading-relaxed font-light opacity-80 mb-6">
+                                    Vamsi's philosophy centers on the 'Resilient Void'—the idea that the space between materials is as vital as the structure itself, allowing for natural thermal siphoning and emotional breath.
+                                </p>
+<div class="flex gap-2">
+<span class="h-1 w-8 bg-secondary"></span>
+<span class="h-1 w-2 bg-secondary/40"></span>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-16 border-t border-outline-variant grid grid-cols-3 gap-8">
+<div>
+<span class="block font-headline text-3xl text-primary mb-1">12+</span>
+<span class="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Experience</span>
+</div>
+<div>
+<span class="block font-headline text-3xl text-primary mb-1">40+</span>
+<span class="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Projects</span>
+</div>
+<div>
+<span class="block font-headline text-3xl text-primary mb-1">LEED</span>
+<span class="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Standard</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Associate Architect (Inverted Layout) -->
+<section class="mb-32 relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Left: Bio & Map -->
+<div class="lg:col-span-7 order-2 lg:order-1 lg:pt-12">
+<div class="max-w-xl lg:ml-auto text-right">
+<span class="font-label uppercase tracking-[0.4em] text-[10px] text-secondary font-black block mb-4">Associate Architect</span>
+<h2 class="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Pragada Lakshmi Priya</h2>
+<div class="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
+<p>
+                            Lakshmi Priya brings a critical eye for spatial narrative and tectonic detail. Her expertise lies in the seamless integration of interior environments with architectural shells, focusing on human-centric design.
+                        </p>
+<!-- Influence Map Trigger -->
+<div class="flex justify-end relative">
+<button class="phi-trigger flex items-center gap-4 text-primary font-bold uppercase tracking-widest text-xs border-b border-primary pb-2 hover:text-secondary transition-colors group">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform" data-icon="explore">explore</span>
+<span>Influence Map</span>
+</button>
+<!-- Influence Pop-over -->
+<div class="phi-popover absolute right-0 top-full mt-4 w-80 bg-surface-container-highest text-primary p-8 shadow-2xl z-20 border border-primary/10 text-left">
+<h4 class="font-label text-[10px] uppercase tracking-widest font-black mb-6">Tectonic Influences</h4>
+<ul class="space-y-4 text-xs">
+<li class="flex justify-between border-b border-outline-variant pb-2">
+<span>Scandinavian Minimalism</span>
+<span class="text-secondary">40%</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant pb-2">
+<span>Brutalist Textures</span>
+<span class="text-secondary">35%</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant pb-2">
+<span>Vernacular Craft</span>
+<span class="text-secondary">25%</span>
+</li>
+</ul>
+</div>
+</div>
+<p class="text-base text-slate-500 italic">
+                            Driving the studio's research into adaptive reuse and circular economy materials.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right: Portrait & Technical Info -->
+<div class="lg:col-span-5 order-1 lg:order-2 space-y-8">
+<div class="relative group aspect-[4/5] overflow-hidden bg-surface-container-highest">
+<img alt="Pragada Lakshmi Priya" class="w-full h-full object-cover grayscale brightness-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop"/>
+<div class="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
+<div class="absolute top-8 right-8 bg-primary/90 text-on-primary px-4 py-1 text-[10px] uppercase tracking-widest font-bold">Lead 01.B</div>
+</div>
+<div class="grid grid-cols-1 gap-px bg-outline-variant">
+<div class="bg-surface p-6 flex justify-between items-center">
+<div>
+<span class="block text-[10px] uppercase tracking-widest text-slate-400 mb-1">Portfolio Status</span>
+<span class="font-label text-xs font-bold text-primary italic">Active Case Studies</span>
+</div>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="arrow_outward">arrow_outward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Global Technical Specs (Bottom Highlight) -->
+<section class="mt-24 py-24 border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-2">
+<h3 class="font-headline text-3xl text-primary mb-6">The SAGE Standard</h3>
+<p class="font-body text-on-surface-variant font-light leading-relaxed">
+                    Our team operates as a single organism, utilizing BIM level 3 integration and parametric modeling to ensure every design choice is backed by environmental data.
+                </p>
+</div>
+<div class="space-y-6">
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-secondary">Tech Stack</div>
+<ul class="font-label text-xs text-on-surface-variant space-y-3 font-medium">
+<li>Rhino + Grasshopper</li>
+<li>Revit (LOD 400)</li>
+<li>Ladybug Tools</li>
+</ul>
+</div>
+<div class="space-y-6">
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-secondary">Commitments</div>
+<ul class="font-label text-xs text-on-surface-variant space-y-3 font-medium">
+<li>2030 Challenge</li>
+<li>Circular Economy</li>
+<li>Biophilic Integration</li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-[#edeeee] dark:bg-slate-900 border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<span class="font-headline text-lg italic text-primary dark:text-white block mb-4">SAGE Design Labs</span>
+<p class="font-body text-[10px] tracking-[0.2em] uppercase text-secondary dark:text-secondary-fixed max-w-sm">
+                © 2024 SAGE Design Labs. Resilient structures harmonized with organic environments. Every line calculated for impact.
+            </p>
+</div>
+<div class="col-span-1 flex flex-col gap-4">
+<a class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-primary dark:hover:text-white transition-colors" href="#">Sustainability Report</a>
+<a class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-primary dark:hover:text-white transition-colors" href="#">Privacy &amp; Data</a>
+</div>
+<div class="col-span-1 flex flex-col gap-4">
+<a class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-primary dark:hover:text-white transition-colors" href="#">Press &amp; Media</a>
+<a class="font-body text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-primary dark:hover:text-white transition-colors" href="#">Collaborations</a>
+</div>
+</div>
+</footer>
+</body></html>
