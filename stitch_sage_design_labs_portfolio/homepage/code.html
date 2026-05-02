@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAGE Design Labs - Designing architecture that performs responsibly</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c6d1",
+                        "inverse-surface": "#2e3131",
+                        "secondary-fixed": "#d1e9d4",
+                        "on-secondary-fixed": "#0c1f13",
+                        "inverse-primary": "#a4c8ff",
+                        "on-tertiary-container": "#a5b2a5",
+                        "tertiary-fixed-dim": "#bdcabc",
+                        "error": "#ba1a1a",
+                        "surface": "#f8f9f9",
+                        "on-primary-fixed-variant": "#19487b",
+                        "surface-tint": "#366094",
+                        "primary-fixed": "#d4e3ff",
+                        "tertiary-container": "#39453b",
+                        "tertiary": "#232f25",
+                        "surface-container-low": "#f3f4f4",
+                        "on-surface": "#191c1c",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8e8",
+                        "secondary-fixed-dim": "#b5ccb8",
+                        "on-surface-variant": "#42474f",
+                        "secondary-container": "#d1e9d4",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9f9",
+                        "on-secondary-fixed-variant": "#374b3c",
+                        "surface-dim": "#d9dada",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e1e3e3",
+                        "primary-fixed-dim": "#a4c8ff",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9f9",
+                        "surface-variant": "#e1e3e3",
+                        "surface-container": "#edeeee",
+                        "on-error-container": "#93000a",
+                        "primary": "#002d56",
+                        "outline": "#737780",
+                        "tertiary-fixed": "#d9e6d8",
+                        "secondary": "#4e6353",
+                        "on-secondary-container": "#546959",
+                        "on-tertiary-fixed": "#131e15",
+                        "on-background": "#191c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed-variant": "#3e4a3f",
+                        "on-primary-fixed": "#001c3a",
+                        "on-primary-container": "#89b1eb",
+                        "primary-container": "#124376"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-shadow-lg { text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08); }
+        
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0, 45, 86, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 45, 86, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .blueprint-grid-fine {
+            background-image: 
+                linear-gradient(to right, rgba(0, 45, 86, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 45, 86, 0.05) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blueprint-reveal::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .group:hover .blueprint-reveal::before {
+            opacity: 1;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            display: none;
+        }
+        .group:hover .scanline {
+            display: block;
+            animation: scan 2s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container blueprint-bg">
+<!-- Annotation Layer (Fixed/Absolute Markers) -->
+<div class="fixed top-32 left-6 z-40 hidden xl:block pointer-events-none">
+<div class="font-mono text-[10px] text-primary/30 rotate-90 origin-left uppercase tracking-widest">
+        Lat: 40.7128° N // Lng: 74.0060° W
+    </div>
+</div>
+<div class="fixed bottom-32 right-6 z-40 hidden xl:block pointer-events-none">
+<div class="font-mono text-[10px] text-primary/30 -rotate-90 origin-right uppercase tracking-widest">
+        Scale: 1:500 @ A3 // SAGE_REF_0024
+    </div>
+</div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-slate-950/60 backdrop-blur-lg border-b border-outline-variant/20 shadow-[0_20px_40px_rgba(25,28,28,0.03)]">
+<div class="flex justify-between items-center px-12 h-24 w-full max-w-screen-2xl mx-auto">
+<a class="text-2xl font-headline font-black text-[#002d56] dark:text-white uppercase flex items-center gap-3" href="#">
+<img alt="SAGE Design Labs Logo" class="h-8 w-auto" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop"/>
+            SAGE Design Labs
+        </a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#002d56] dark:text-white font-bold border-b-2 border-[#4e6353] pb-1 font-body uppercase tracking-widest text-xs hover:text-[#4e6353] transition-all duration-300" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium font-body uppercase tracking-widest text-xs hover:text-[#4e6353] transition-all duration-300" href="#">About</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium font-body uppercase tracking-widest text-xs hover:text-[#4e6353] transition-all duration-300" href="#">Projects</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium font-body uppercase tracking-widest text-xs hover:text-[#4e6353] transition-all duration-300" href="#">Team</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium font-body uppercase tracking-widest text-xs hover:text-[#4e6353] transition-all duration-300" href="#">Contact</a>
+</nav>
+<a class="hidden lg:inline-flex items-center justify-center px-6 py-3 bg-primary text-on-primary rounded-md font-body text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-all duration-300 scale-95 hover:scale-100" href="#">
+            Start a Project
+        </a>
+<button class="md:hidden text-[#002d56] p-2">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</header>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative h-[90vh] min-h-[700px] w-full flex items-end pb-24 md:pb-32 px-6 md:px-12 xl:px-24 bg-surface-container-low overflow-hidden group">
+<div class="absolute inset-0 z-0">
+<img alt="Modern sustainable architecture" class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2000&auto=format&fit=crop"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"></div>
+<!-- Blueprint Overlay on Hero -->
+<div class="absolute inset-0 opacity-10 blueprint-grid-fine pointer-events-none"></div>
+</div>
+<div class="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-start gap-8">
+<div class="font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-[-2rem]">
+                Section_ID: HERO_01 // Phase: CONCEPT
+            </div>
+<h1 class="font-headline text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white font-normal tracking-tight leading-[1.1] text-shadow-lg max-w-4xl reveal-on-scroll">
+                Designing architecture that performs <span class="italic text-secondary-fixed">responsibly today</span> and endures meaningfully.
+            </h1>
+<div class="flex flex-col sm:flex-row gap-6 mt-4 reveal-on-scroll" style="transition-delay: 200ms;">
+<a class="inline-flex items-center justify-center px-8 py-4 bg-primary text-on-primary rounded-md font-body text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-all duration-300" href="#projects">
+                    View Projects
+                </a>
+<a class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-md font-body text-sm font-semibold uppercase tracking-widest hover:bg-white/20 transition-all duration-300" href="#about">
+                    Our Philosophy
+                </a>
+</div>
+</div>
+</section>
+<!-- Introduction Section -->
+<section class="py-32 px-6 md:px-12 xl:px-24 bg-background relative overflow-hidden" id="about">
+<div class="absolute top-0 right-0 w-1/3 h-full blueprint-grid-fine opacity-20 pointer-events-none"></div>
+<div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative z-10">
+<div class="lg:col-span-5 flex flex-col justify-start reveal-on-scroll">
+<div class="flex items-center gap-4 mb-6">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-mono text-[11px] uppercase tracking-widest text-primary font-bold">The SAGE Ethos</span>
+</div>
+<h2 class="font-headline text-4xl md:text-5xl text-on-background tracking-tight leading-tight">
+                    Resilient structures harmonized with organic environments.
+                </h2>
+<div class="mt-8 font-mono text-[10px] text-primary/40 uppercase">
+                    Ref_01: Environmental Integration<br/>
+                    Ref_02: Material Circularity
+                </div>
+</div>
+<div class="lg:col-span-7 flex flex-col gap-8 lg:pt-12 reveal-on-scroll" style="transition-delay: 300ms;">
+<p class="font-body text-lg md:text-xl text-on-surface-variant leading-relaxed font-light">
+                    At SAGE Design Labs, we reject the notion that structural permanence must come at the expense of ecological vitality. Our practice is rooted in a rigorous analytical approach to site, climate, and material lifecycle.
+                </p>
+<div class="relative border-l border-primary/20 pl-8 py-4">
+<p class="font-body text-base text-on-surface-variant leading-relaxed italic">
+                        "We view every project as a localized intervention within a broader global system. By integrating advanced sustainable technologies with timeless spatial principles, we create environments that foster human well-being."
+                    </p>
+<span class="absolute top-0 left-0 w-2 h-2 bg-primary -translate-x-1/2"></span>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-body text-sm font-bold uppercase tracking-widest mt-4 hover:text-primary-container transition-all group" href="#">
+                    Read Full Manifesto 
+                    <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Featured Projects (Interactive Grid) -->
+<section class="py-32 px-6 md:px-12 xl:px-24 bg-surface-container-low relative" id="projects">
+<div class="max-w-screen-2xl mx-auto flex flex-col gap-16">
+<div class="flex flex-col md:flex-row justify-between items-end gap-8 reveal-on-scroll">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="font-mono text-[11px] uppercase tracking-widest text-secondary font-bold">Selected Works</span>
+<span class="font-mono text-[11px] text-secondary/40">[2021-2024]</span>
+</div>
+<h2 class="font-headline text-4xl md:text-5xl text-on-background tracking-tight uppercase">Built Environments</h2>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-body text-sm font-bold uppercase tracking-widest hover:text-primary-container transition-colors" href="#">
+                    View All Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[450px]">
+<!-- Featured Project 1 (Large with Blueprint Hover) -->
+<div class="md:col-span-8 md:row-span-2 relative group overflow-hidden bg-primary cursor-pointer blueprint-reveal reveal-on-scroll">
+<!-- Base Image -->
+<img alt="The Canopy House" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-40" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"/>
+<!-- Tech Overlay (Visible on Hover) -->
+<div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col p-12 justify-start pointer-events-none">
+<div class="font-mono text-xs text-white/80 space-y-2">
+<p class="flex justify-between w-64 border-b border-white/20 pb-1"><span>COORDINATES:</span> <span>45.523° N</span></p>
+<p class="flex justify-between w-64 border-b border-white/20 pb-1"><span>ELEVATION:</span> <span>+1,200m</span></p>
+<p class="flex justify-between w-64 border-b border-white/20 pb-1"><span>MATERIAL:</span> <span>CLT Timber</span></p>
+<p class="flex justify-between w-64 border-b border-white/20 pb-1"><span>EFFICIENCY:</span> <span>Net Zero</span></p>
+</div>
+</div>
+<!-- Scanline Effect -->
+<div class="absolute inset-0 bg-white/5 h-1 z-30 scanline"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-40">
+<div class="bg-white/95 backdrop-blur-xl p-8 md:p-12 transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 border border-outline-variant/30">
+<span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold mb-2 block">Residential // 001</span>
+<h3 class="font-headline text-3xl md:text-4xl text-primary tracking-tight mb-4">The Canopy House</h3>
+<p class="font-body text-base text-on-surface-variant max-w-lg mb-6">A zero-emission residential retreat utilizing passive solar design and structural timber to blend into its forested site.</p>
+<div class="flex items-center gap-4">
+<span class="h-[1px] w-12 bg-primary"></span>
+<span class="font-mono text-[10px] uppercase tracking-tighter text-primary">Explore technical specs</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Project 2 (Blueprint Reveal) -->
+<div class="md:col-span-4 md:row-span-1 relative group overflow-hidden bg-[#0a192f] flex flex-col justify-end p-8 blueprint-reveal reveal-on-scroll">
+<img alt="Meridian Tower" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-30" src="https://images.unsplash.com/photo-1541888079813-9b161e1f7c3b?q=80&w=2000&auto=format&fit=crop"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="relative z-20">
+<div class="font-mono text-[9px] text-white/50 mb-1">SPEC_ID: CRT_88 // GL_04</div>
+<span class="font-mono text-[10px] uppercase tracking-widest text-secondary-fixed font-bold mb-1 block">Commercial</span>
+<h3 class="font-headline text-2xl text-white tracking-tight">Meridian Tower</h3>
+</div>
+</div>
+<!-- Featured Project 3 (Blueprint Reveal) -->
+<div class="md:col-span-4 md:row-span-1 relative group overflow-hidden bg-[#0a192f] flex flex-col justify-end p-8 blueprint-reveal reveal-on-scroll">
+<img alt="Oasis Wellness Pavilion" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-30" src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+<div class="relative z-20">
+<div class="font-mono text-[9px] text-white/50 mb-1">SPEC_ID: MED_02 // BIO_19</div>
+<span class="font-mono text-[10px] uppercase tracking-widest text-secondary-fixed font-bold mb-1 block">Healthcare</span>
+<h3 class="font-headline text-2xl text-white tracking-tight">Oasis Wellness Pavilion</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action Section -->
+<section class="py-32 px-6 md:px-12 xl:px-24 bg-white relative overflow-hidden flex flex-col items-center justify-center min-h-[600px]">
+<!-- Technical Grid Background -->
+<div class="absolute inset-0 blueprint-bg opacity-40"></div>
+<div class="absolute inset-0 blueprint-grid-fine opacity-10"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center gap-8 reveal-on-scroll">
+<div class="relative inline-block mb-4">
+<span class="material-symbols-outlined text-primary text-6xl opacity-80" style="font-variation-settings: 'FILL' 0, 'wght' 200;">architecture</span>
+<span class="absolute -top-2 -right-4 font-mono text-[10px] text-primary/40">REF: CTA_77</span>
+</div>
+<h2 class="font-headline text-4xl md:text-5xl lg:text-7xl text-primary tracking-tight leading-tight uppercase font-light">
+                Ready to <span class="font-bold">build</span> the future?
+            </h2>
+<p class="font-body text-lg md:text-xl text-on-surface-variant font-light max-w-2xl mx-auto leading-relaxed">
+                Collaborate with SAGE Design Labs to realize architectural visions that are sustainable, structurally profound, and meticulously crafted.
+            </p>
+<div class="mt-8 flex flex-col items-center gap-4">
+<a class="inline-flex items-center justify-center px-12 py-5 bg-primary text-on-primary rounded-md font-body text-sm font-semibold uppercase tracking-widest hover:bg-primary-container transition-all duration-300" href="#">
+                    Initiate a Consultation
+                </a>
+<span class="font-mono text-[9px] text-primary/30 uppercase tracking-[0.3em]">Estimated TAT: 48 Hours // Global Ops</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-surface-container border-t border-outline-variant/30 relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-screen-2xl mx-auto px-12 relative z-10">
+<div class="md:col-span-1 flex flex-col gap-6">
+<span class="font-headline text-2xl font-black text-[#002d56] uppercase">SAGE</span>
+<div class="space-y-4">
+<p class="font-body text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/70 leading-loose">
+                    © 2024 SAGE Design Labs.<br/>
+                    Resilient structures harmonized with organic environments.
+                </p>
+<div class="font-mono text-[9px] text-primary/30">
+                    V.2.4.0_STABLE // BUILD_ARCHITERRA
+                </div>
+</div>
+</div>
+<div class="md:col-span-3 flex flex-wrap gap-x-12 gap-y-6 md:justify-end items-start pt-2">
+<a class="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-[#002d56] transition-colors" href="#">Sustainability_Report.pdf</a>
+<a class="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-[#002d56] transition-colors" href="#">Privacy_Policy</a>
+<a class="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-[#002d56] transition-colors" href="#">Press_Kit</a>
+<a class="font-mono text-[10px] tracking-[0.2em] uppercase text-slate-500 hover:text-[#002d56] transition-colors" href="#">Careers.exe</a>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for scroll reveals
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body></html>
