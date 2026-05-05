@@ -69,7 +69,7 @@ export default {
               "headline": ["Noto Serif", "serif"],
               "body": ["Manrope", "sans-serif"],
               "label": ["Manrope", "sans-serif"],
-              "mono": ["JetBrains Mono", "monospace"]
+              "mono": ["Poppins", "sans-serif"]
           }
       },
   },

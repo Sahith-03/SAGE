@@ -4,10 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 export default function Layout() {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
-    const dotRef = useRef<HTMLDivElement>(null);
-    const ringRef = useRef<HTMLDivElement>(null);
-    const mouse = useRef({ x: -100, y: -100 });
-    const ringPos = useRef({ x: -100, y: -100 });
+    const cursorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,38 +14,38 @@ export default function Layout() {
             setScrollProgress(Number(scroll) * 100);
         };
 
+        let rafId: number;
         const handleMouseMove = (e: MouseEvent) => {
-            mouse.current = { x: e.clientX, y: e.clientY };
-            // Dot tracks instantly
-            if (dotRef.current) {
-                dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+            if (cursorRef.current) {
+                // Cancel previous requestAnimationFrame
+                if (rafId) cancelAnimationFrame(rafId);
+                // Update position smoothly
+                rafId = requestAnimationFrame(() => {
+                    if (cursorRef.current) {
+                        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+                    }
+                });
             }
-            // Detect hover
-            const target = e.target as HTMLElement;
-            const hovering = !!(target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button' || target.closest('a') || target.closest('button'));
-            setIsHovering(hovering);
         };
 
-        // Lerp ring loop
-        const LERP = 0.12;
-        let rafId: number;
-        const animateRing = () => {
-            ringPos.current.x += (mouse.current.x - ringPos.current.x) * LERP;
-            ringPos.current.y += (mouse.current.y - ringPos.current.y) * LERP;
-            if (ringRef.current) {
-                ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
+        const handleMouseOver = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button' || target.closest('a') || target.closest('button')) {
+                setIsHovering(true);
+            } else {
+                setIsHovering(false);
             }
-            rafId = requestAnimationFrame(animateRing);
         };
-        rafId = requestAnimationFrame(animateRing);
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('mousemove', handleMouseMove);
-            cancelAnimationFrame(rafId);
+            window.removeEventListener('mouseover', handleMouseOver);
+            if (rafId) cancelAnimationFrame(rafId);
         };
     }, []);
 
@@ -58,38 +55,15 @@ export default function Layout() {
 
     return (
         <div className="flex flex-col min-h-screen font-body text-on-background bg-background cursor-none">
-            {/* Cursor Dot — instant tracker */}
+            {/* Dynamic Cursor */}
             <div
-                ref={dotRef}
+                ref={cursorRef}
                 className="fixed top-0 left-0 pointer-events-none z-[9999]"
                 style={{ transform: 'translate3d(-100px, -100px, 0)' }}
             >
-                <div
-                    className="-translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-150"
-                    style={{
-                        width: isHovering ? '6px' : '5px',
-                        height: isHovering ? '6px' : '5px',
-                        backgroundColor: isHovering ? '#ffffff' : '#002d56',
-                    }}
-                />
-            </div>
-
-            {/* Cursor Ring — lagging lerp follower */}
-            <div
-                ref={ringRef}
-                className="fixed top-0 left-0 pointer-events-none z-[9998]"
-                style={{ transform: 'translate3d(-100px, -100px, 0)' }}
-            >
-                <div
-                    className="-translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-200 ease-out"
-                    style={{
-                        width: isHovering ? '44px' : '28px',
-                        height: isHovering ? '44px' : '28px',
-                        borderColor: '#002d56',
-                        backgroundColor: isHovering ? '#002d56' : 'transparent',
-                        mixBlendMode: 'normal',
-                    }}
-                />
+                <div className={`rounded-full border border-[#002d56] transition-all duration-300 ease-out flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 ${isHovering ? 'w-12 h-12 bg-[#002d56]/10 backdrop-blur-sm' : 'w-6 h-6'}`}>
+                    <div className={`w-1 h-1 bg-[#002d56] rounded-full transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}></div>
+                </div>
             </div>
 
             {/* Scroll Progress Bar */}
