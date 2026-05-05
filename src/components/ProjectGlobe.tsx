@@ -42,7 +42,7 @@ export default function ProjectGlobeErrorBoundaryWrapper(props: ProjectGlobeProp
 }
 
 function ProjectGlobe({ onProjectClick }: ProjectGlobeProps) {
-  const globeRef = useRef<any>();
+  const globeRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);

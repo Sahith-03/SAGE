@@ -38,12 +38,12 @@ export default function TeamPage() {
                         </div>
                         <div className="grid grid-cols-2 gap-px bg-outline-variant">
                             <div className="bg-surface p-6">
-                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Design Focus</span>
-                                <span className="font-label text-xs font-bold text-primary">Bioclimatic Performance</span>
+                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Education</span>
+                                <span className="font-label text-xs font-bold text-primary">NIT Calicut</span>
                             </div>
                             <div className="bg-surface p-6">
-                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Material Core</span>
-                                <span className="font-label text-xs font-bold text-primary">Carbon-Negative Concrete</span>
+                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Design Focus</span>
+                                <span className="font-label text-xs font-bold text-primary">Sustainable Performance</span>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,10 @@ export default function TeamPage() {
                             <h2 className="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Ar. Nerella Manoj Vamsi</h2>
                             <div className="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
                                 <p>
-                                    Manoj Vamsi leads SAGE with a singular vision: to create architecture that doesn't just occupy space, but elevates it. His approach merges rigorous technical performance with profound environmental sensitivity.
+                                    An award-winning architect and alumnus of the National Institute of Technology Calicut, Manoj Vamsi brings over five years of professional experience across residential, commercial, institutional, and urban-scale projects. His work is grounded in sustainability, performance-driven design, and deep contextual responsiveness.
+                                </p>
+                                <p>
+                                    He founded SAGE Design Labs with the objective of delivering architecture that is environmentally responsible, strategically planned, and future-ready—rooted in the belief that architecture must go beyond form-making, serving as a structured response to climate, culture, function, and long-term impact.
                                 </p>
                                 <div className="relative inline-block group">
                                     <button className="phi-trigger flex items-center gap-4 text-primary font-bold uppercase tracking-widest text-xs border-b border-primary pb-2 hover:text-secondary transition-colors group">
@@ -64,9 +67,9 @@ export default function TeamPage() {
                                     </button>
                                     {/* Philosophy Pop-over */}
                                     <div className="phi-popover absolute left-0 top-full mt-4 w-80 bg-slate-800 text-white p-8 shadow-2xl z-20">
-                                        <h4 className="font-headline text-lg italic mb-4">"The Resilient Void"</h4>
+                                        <h4 className="font-headline text-lg italic mb-4">"Beyond Form-Making"</h4>
                                         <p className="text-xs leading-relaxed font-light opacity-80 mb-6">
-                                            Vamsi's philosophy centers on the 'Resilient Void'—the idea that the space between materials is as vital as the structure itself, allowing for natural thermal siphoning and emotional breath.
+                                            Architecture must serve as a structured response to climate, culture, function, and long-term impact. Every design decision at SAGE is tested against environmental performance, contextual integrity, and the lives of those who inhabit the space.
                                         </p>
                                         <div className="flex gap-2">
                                             <span className="h-1 w-8 bg-secondary"></span>
@@ -77,16 +80,16 @@ export default function TeamPage() {
 
                                 <div className="mt-16 pt-16 border-t border-outline-variant grid grid-cols-3 gap-8">
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">12+</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Experience</span>
+                                        <span className="block font-headline text-3xl text-primary mb-1">5+</span>
+                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Yrs Experience</span>
                                     </div>
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">40+</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Projects</span>
+                                        <span className="block font-headline text-3xl text-primary mb-1">Multi</span>
+                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Typologies</span>
                                     </div>
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">LEED</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Standard</span>
+                                        <span className="block font-headline text-3xl text-primary mb-1">NIT</span>
+                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Calicut Alumni</span>
                                     </div>
                                 </div>
                             </div>
