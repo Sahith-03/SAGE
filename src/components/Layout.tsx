@@ -1,10 +1,15 @@
-import { Outlet, Link, NavLink } from 'react-router-dom';
+import { Outlet, Link, NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
 export default function Layout() {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
     const cursorRef = useRef<HTMLDivElement>(null);
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     useEffect(() => {
         const handleScroll = () => {
