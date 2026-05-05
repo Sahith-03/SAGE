@@ -38,7 +38,7 @@ export default function AboutPage() {
     }, []);
 
     return (
-        <main className="pt-24 min-h-screen flex flex-col items-center bg-background text-on-background font-body antialiased selection:bg-secondary-container selection:text-on-secondary-container architect-grid">
+        <main className="min-h-screen flex flex-col items-center bg-background text-on-background font-body antialiased selection:bg-secondary-container selection:text-on-secondary-container architect-grid">
             <style>{`
                 .architect-grid {
                     background-size: 40px 40px;
@@ -70,7 +70,7 @@ export default function AboutPage() {
             `}</style>
             
             {/* Header/Hero: Spec Sheet Style */}
-            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-20">
+            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-8">
                 <div className="relative spec-border p-1 lg:p-12 bg-white/50 backdrop-blur-sm">
                     <div className="technical-marker marker-tl"></div>
                     <div className="technical-marker marker-tr"></div>
@@ -222,19 +222,22 @@ export default function AboutPage() {
             </section>
 
             {/* Final Architectural Detail */}
-            <section className="w-full h-[500px] relative overflow-hidden">
+            <section className="w-full h-[400px] relative overflow-hidden bg-primary/5 border-t border-outline-variant/30">
                 <div className="absolute inset-0 z-0">
-                    <img alt="Architectural Details" className="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2000&auto=format&fit=crop" />
+                    <img alt="Architectural Details" className="w-full h-full object-cover grayscale opacity-20" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2000&auto=format&fit=crop" />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-[80%] h-[60%] border border-primary/20 relative">
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.5em] text-primary uppercase">Longitudinal Section A-A</div>
-                        <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-primary/10"></div>
-                        <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-primary/10"></div>
+                
+
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center px-6">
+                    <h5 className="text-primary font-headline text-3xl md:text-5xl italic tracking-tight mb-4">
+                        The harmony of structure and soul.
+                    </h5>
+                    <div className="flex items-center gap-4">
+                        <div className="w-8 h-[1px] bg-secondary"></div>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Sage Philosophy</span>
+                        <div className="w-8 h-[1px] bg-secondary"></div>
                     </div>
-                </div>
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center z-10">
-                    <h5 className="text-primary font-headline text-2xl italic">The harmony of structure and soul.</h5>
                 </div>
             </section>
         </main>

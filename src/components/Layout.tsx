@@ -1,10 +1,13 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, NavLink } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
 export default function Layout() {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
-    const cursorRef = useRef<HTMLDivElement>(null);
+    const dotRef = useRef<HTMLDivElement>(null);
+    const ringRef = useRef<HTMLDivElement>(null);
+    const mouse = useRef({ x: -100, y: -100 });
+    const ringPos = useRef({ x: -100, y: -100 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -14,52 +17,79 @@ export default function Layout() {
             setScrollProgress(Number(scroll) * 100);
         };
 
-        let rafId: number;
         const handleMouseMove = (e: MouseEvent) => {
-            if (cursorRef.current) {
-                // Cancel previous requestAnimationFrame
-                if (rafId) cancelAnimationFrame(rafId);
-                // Update position smoothly
-                rafId = requestAnimationFrame(() => {
-                    if (cursorRef.current) {
-                        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-                    }
-                });
+            mouse.current = { x: e.clientX, y: e.clientY };
+            // Dot tracks instantly
+            if (dotRef.current) {
+                dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
             }
+            // Detect hover
+            const target = e.target as HTMLElement;
+            const hovering = !!(target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button' || target.closest('a') || target.closest('button'));
+            setIsHovering(hovering);
         };
 
-        const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button' || target.closest('a') || target.closest('button')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
+        // Lerp ring loop
+        const LERP = 0.12;
+        let rafId: number;
+        const animateRing = () => {
+            ringPos.current.x += (mouse.current.x - ringPos.current.x) * LERP;
+            ringPos.current.y += (mouse.current.y - ringPos.current.y) * LERP;
+            if (ringRef.current) {
+                ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
             }
+            rafId = requestAnimationFrame(animateRing);
         };
+        rafId = requestAnimationFrame(animateRing);
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('mousemove', handleMouseMove, { passive: true });
-        window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseover', handleMouseOver);
-            if (rafId) cancelAnimationFrame(rafId);
+            cancelAnimationFrame(rafId);
         };
     }, []);
 
+    // Active style helper for NavLinks
+    const getNavLinkClass = ({ isActive }: { isActive: boolean }) => 
+        `transition-all duration-300 pb-0.5 ${isActive ? 'text-[#002d56] border-b-2 border-[#002d56]' : 'text-[#42474f] hover:text-[#002d56]'}`;
+
     return (
         <div className="flex flex-col min-h-screen font-body text-on-background bg-background cursor-none">
-            {/* Dynamic Cursor */}
+            {/* Cursor Dot — instant tracker */}
             <div
-                ref={cursorRef}
+                ref={dotRef}
                 className="fixed top-0 left-0 pointer-events-none z-[9999]"
                 style={{ transform: 'translate3d(-100px, -100px, 0)' }}
             >
-                <div className={`rounded-full border border-[#002d56] transition-all duration-300 ease-out flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 ${isHovering ? 'w-12 h-12 bg-[#002d56]/10 backdrop-blur-sm' : 'w-6 h-6'}`}>
-                    <div className={`w-1 h-1 bg-[#002d56] rounded-full transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}></div>
-                </div>
+                <div
+                    className="-translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-150"
+                    style={{
+                        width: isHovering ? '6px' : '5px',
+                        height: isHovering ? '6px' : '5px',
+                        backgroundColor: isHovering ? '#ffffff' : '#002d56',
+                    }}
+                />
+            </div>
+
+            {/* Cursor Ring — lagging lerp follower */}
+            <div
+                ref={ringRef}
+                className="fixed top-0 left-0 pointer-events-none z-[9998]"
+                style={{ transform: 'translate3d(-100px, -100px, 0)' }}
+            >
+                <div
+                    className="-translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-200 ease-out"
+                    style={{
+                        width: isHovering ? '44px' : '28px',
+                        height: isHovering ? '44px' : '28px',
+                        borderColor: '#002d56',
+                        backgroundColor: isHovering ? '#002d56' : 'transparent',
+                        mixBlendMode: 'normal',
+                    }}
+                />
             </div>
 
             {/* Scroll Progress Bar */}
@@ -72,27 +102,29 @@ export default function Layout() {
 
             {/* TopNavBar — matches Stitch exactly */}
             <nav className="fixed top-[3px] w-full z-50 bg-[#f8f9f9]/95 backdrop-blur-sm border-b border-[#e1e3e3]">
-                <div className="flex justify-between items-center px-10 md:px-16 h-[72px] w-full max-w-screen-2xl mx-auto">
+                <div className="flex justify-between items-center px-10 md:px-16 h-[60px] w-full max-w-screen-2xl mx-auto">
                     {/* Logo */}
                     <Link to="/" className="flex items-center group h-full">
                         <img 
-                            src="/images/sage_logo_final.png" 
+                            src={`${import.meta.env.BASE_URL}images/logo-remove-bg.png`} 
                             alt="SAGE Design Labs Logo" 
-                            className="h-16 w-auto object-contain mix-blend-multiply"
+                            className="h-14 w-auto object-contain"
                         />
                     </Link>
 
                     {/* Nav links */}
-                    <div className="hidden lg:flex items-center gap-10 font-mono text-[11px] text-[#42474f] uppercase tracking-widest">
-                        <Link to="/" className="text-[#002d56] border-b-2 border-[#002d56] pb-0.5 hover:opacity-70 transition-opacity">HOME</Link>
-                        <Link to="/about" className="hover:text-[#002d56] transition-colors">ABOUT</Link>
-                        <Link to="/projects" className="hover:text-[#002d56] transition-colors">PROJECTS</Link>
-                        <Link to="/team" className="hover:text-[#002d56] transition-colors">TEAM</Link>
-                        <Link to="/contact" className="hover:text-[#002d56] transition-colors">CONTACT</Link>
+                    <div className="hidden lg:flex items-center gap-10 font-mono text-[11px] uppercase tracking-widest">
+                        <NavLink to="/" end className={getNavLinkClass}>HOME</NavLink>
+                        <NavLink to="/about" className={getNavLinkClass}>ABOUT</NavLink>
+                        <NavLink to="/projects" className={getNavLinkClass}>PROJECTS</NavLink>
+                        <NavLink to="/team" className={getNavLinkClass}>TEAM</NavLink>
+                        <NavLink to="/blogs" className={getNavLinkClass}>BLOGS</NavLink>
+                        <NavLink to="/careers" className={getNavLinkClass}>CAREERS</NavLink>
+                        <NavLink to="/contact" className={getNavLinkClass}>CONTACT</NavLink>
                     </div>
 
                     {/* CTA button */}
-                    <Link to="/contact" className="hidden md:block bg-[#002d56] text-white px-6 py-3 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors">
+                    <Link to="/contact" className="hidden md:block bg-[#002d56] text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors">
                         START A PROJECT
                     </Link>
                     <div className="lg:hidden text-[#002d56]">
@@ -102,7 +134,7 @@ export default function Layout() {
             </nav>
 
             {/* Page top offset for fixed nav */}
-            <div className="pt-[78px] flex-grow">
+            <div className="pt-[59px] flex-grow">
                 <Outlet />
             </div>
 
@@ -124,7 +156,7 @@ export default function Layout() {
                         <Link to="#" className="hover:text-[#002d56] transition-colors">SUSTAINABILITY_REPORT.PDF</Link>
                         <Link to="#" className="hover:text-[#002d56] transition-colors">PRIVACY_POLICY</Link>
                         <Link to="#" className="hover:text-[#002d56] transition-colors">PRESS_KIT</Link>
-                        <Link to="#" className="hover:text-[#002d56] transition-colors">CAREERS.EXE</Link>
+                        <Link to="/careers" className="hover:text-[#002d56] transition-colors">CAREERS.EXE</Link>
                     </div>
                 </div>
             </footer>
