@@ -24,7 +24,14 @@ export default function BlogPostPage() {
                         <span className="font-label uppercase tracking-[0.2em] text-[10px] text-secondary font-bold bg-secondary/5 px-2 py-1 border border-secondary/20">
                             {blog.category}
                         </span>
-                        <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest">
+                        <div className="flex gap-2">
+                            {blog.tags.map(tag => (
+                                <span key={tag} className="font-mono text-[9px] text-slate-400 uppercase tracking-widest border border-outline-variant/30 px-2 py-0.5">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                        <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest ml-auto">
                             {blog.date}
                         </span>
                     </div>

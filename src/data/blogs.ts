@@ -3,6 +3,7 @@ export interface BlogPost {
     title: string;
     date: string;
     category: string;
+    tags: string[];
     image: string;
     excerpt: string;
     content: string; // Changed to string for Markdown
@@ -14,6 +15,7 @@ export const blogsData: BlogPost[] = [
         title: "Biomimicry in Architecture: Understanding Its Origins, Applications, and Impact",
         date: "May 10, 2026",
         category: "Biomimicry",
+        tags: ["Biophilia", "Sustainability", "Morphology"],
         image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1000&auto=format&fit=crop",
         excerpt: "Biomimicry in architecture bridges the intelligence of natural design with human ingenuity. This article explores biomimicry’s origins, principles, and real-world applications.",
         content: `
@@ -35,6 +37,7 @@ By understanding and applying the principles of biomimicry, architects are creat
         title: "The Vastu-Compliant Kitchen: Elemental Alignment, Spatial Planning",
         date: "April 22, 2026",
         category: "Vastu Shastra",
+        tags: ["Heritage", "Livability", "Interiors"],
         image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000&auto=format&fit=crop",
         excerpt: "Discover how Vastu Shastra influences every detail of the kitchen: from placement and direction to stove and sink alignment, ventilation, and layout.",
         content: `
@@ -58,6 +61,7 @@ When these elements are aligned, the kitchen becomes a space that fosters well-b
         title: "The Quintessential Elements of Vastu Shastra: An Exploration of the Pancha Bhootas",
         date: "March 15, 2026",
         category: "Heritage",
+        tags: ["Heritage", "Identity", "Environment"],
         image: "https://images.unsplash.com/photo-1600607688066-890987f18a86?q=80&w=1000&auto=format&fit=crop",
         excerpt: "Explore the role of the Pancha Bhootas in Vastu Shastra, from understanding the five elements to balancing them within daily life.",
         content: `
@@ -79,6 +83,7 @@ Each element corresponds to a specific direction and energy frequency. By design
         title: "Enhancing Workplace Synergy: Guidelines for Optimizing Office Layouts",
         date: "Feb 28, 2026",
         category: "Corporate",
+        tags: ["Workplace", "Agile", "Corporate"],
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
         excerpt: "Learn how spatial flow shapes office design, from entrance orientation and seating plans to lighting, décor, and collaborative zones.",
         content: `
@@ -92,6 +97,7 @@ Key considerations include maximizing natural light, creating clear circulation 
         title: "Difference Between Interior Architects vs Interior Designers",
         date: "Feb 10, 2026",
         category: "Interiors",
+        tags: ["Interiors", "Building", "Vision"],
         image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=1000&auto=format&fit=crop",
         excerpt: "This article explores the distinct roles and expertise of interior architects and interior designers.",
         content: `
@@ -105,6 +111,7 @@ Interior architecture focuses on the structural and spatial design of an interio
         title: "The Role of Tradition in Ancient Indian Architecture",
         date: "Jan 15, 2026",
         category: "Heritage",
+        tags: ["Heritage", "Identity", "Cities"],
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop",
         excerpt: "Ancient architectural science significantly shaped traditional Indian architecture and the way buildings were designed and constructed.",
         content: `

@@ -1,8 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function CareersPage() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Prevent background scroll when modal is open
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isModalOpen]);
+
     return (
-        <main className="flex-grow pt-12 pb-16 px-6 md:px-12 max-w-screen-2xl mx-auto w-full blueprint-bg">
+        <main className="flex-grow pt-12 pb-16 px-6 md:px-12 max-w-screen-2xl mx-auto w-full blueprint-bg relative">
             <style>{`
                 .phi-popover {
                     opacity: 0;
@@ -14,6 +28,10 @@ export default function CareersPage() {
                     opacity: 1;
                     transform: translateY(0);
                     pointer-events: auto;
+                }
+                .modal-overlay {
+                    backdrop-filter: blur(8px);
+                    background-color: rgba(0, 45, 86, 0.4);
                 }
             `}</style>
             
@@ -130,7 +148,10 @@ export default function CareersPage() {
                                     <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">location_on</span> San Francisco, CA</span>
                                 </div>
                             </div>
-                            <button className="bg-primary text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors flex items-center gap-2">
+                            <button 
+                                onClick={() => setIsModalOpen(true)}
+                                className="bg-primary text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors flex items-center gap-2"
+                            >
                                 Apply Now <span className="material-symbols-outlined text-sm">arrow_forward</span>
                             </button>
                         </div>
@@ -175,7 +196,10 @@ export default function CareersPage() {
                                     <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">location_on</span> Hybrid / San Francisco, CA</span>
                                 </div>
                             </div>
-                            <button className="bg-primary text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors flex items-center gap-2">
+                            <button 
+                                onClick={() => setIsModalOpen(true)}
+                                className="bg-primary text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors flex items-center gap-2"
+                            >
                                 Apply Now <span className="material-symbols-outlined text-sm">arrow_forward</span>
                             </button>
                         </div>
@@ -190,18 +214,53 @@ export default function CareersPage() {
                 </div>
             </section>
 
-            {/* General Application */}
-            <section className="py-12 border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-8 bg-surface px-8">
-                <div>
-                    <h3 className="font-headline text-2xl text-primary mb-2">Don't see your role?</h3>
-                    <p className="font-body text-sm text-on-surface-variant font-light">
-                        We are always looking for talented individuals. Send us your portfolio.
-                    </p>
+            {/* Application Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-start justify-center p-4 modal-overlay overflow-y-auto">
+                    <div className="bg-white w-full max-w-[600px] relative shadow-2xl rounded-[2.5rem] my-auto">
+                        <button 
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-8 right-8 text-primary hover:text-secondary transition-colors z-10"
+                        >
+                            <span className="material-symbols-outlined text-3xl">close</span>
+                        </button>
+                        
+                        <div className="p-10 md:p-14">
+                            <div className="flex items-center gap-3 mb-8 text-secondary">
+                                <div className="w-8 h-px bg-secondary"></div>
+                                <span className="font-mono text-[10px] uppercase tracking-[0.3em] font-bold">Application Form</span>
+                            </div>
+                            <h2 className="font-headline text-4xl text-primary mb-10 tracking-tight">Join <span className="italic">SAGE</span> Team</h2>
+                            
+                            <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); }}>
+                                <div className="space-y-8">
+                                    <div className="relative">
+                                        <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="applicantName">Full Name</label>
+                                        <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantName" placeholder="e.g. MARCUS AURELIUS" required type="text" />
+                                    </div>
+                                    <div className="relative">
+                                        <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="applicantPhone">Contact Number</label>
+                                        <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantPhone" placeholder="+91 XXXXX XXXXX" required type="tel" />
+                                    </div>
+                                    <div className="relative">
+                                        <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="applicantEmail">Email Address</label>
+                                        <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantEmail" placeholder="OFFICE@DOMAIN.COM" required type="email" />
+                                    </div>
+                                    <div className="relative">
+                                        <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="resume">Resume / Portfolio (PDF)</label>
+                                        <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-sm font-body transition-colors outline-none font-medium file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:text-[10px] file:font-mono file:uppercase file:tracking-widest file:bg-primary file:text-white hover:file:bg-[#124376]" id="resume" required type="file" accept=".pdf" />
+                                    </div>
+                                </div>
+                                
+                                <button className="w-full bg-primary text-white px-12 py-5 rounded-none font-mono uppercase tracking-[0.2em] text-xs hover:bg-[#124376] transition-all inline-flex items-center justify-center space-x-4 border border-primary font-bold mt-4" type="submit">
+                                    <span>SUBMIT APPLICATION</span>
+                                    <span className="material-symbols-outlined text-base">send</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <Link to="/contact" className="border border-primary text-primary px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-primary hover:text-white transition-colors">
-                    CONTACT US
-                </Link>
-            </section>
+            )}
 
         </main>
     );

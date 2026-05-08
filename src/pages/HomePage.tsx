@@ -39,8 +39,8 @@ export default function HomePage() {
             <section className="relative w-full h-screen min-h-[600px] overflow-hidden flex flex-col">
                 {/* Full-bleed background image */}
                 <img
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2400&auto=format&fit=crop"
-                    alt="Modern sustainable architecture"
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2400&auto=format&fit=crop"
+                    alt="Large scale commercial building"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
                 {/* Dark overlay */}
@@ -96,13 +96,9 @@ export default function HomePage() {
                             <div className="w-8 h-px bg-[#002d56]"></div>
                             <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-[0.3em] font-bold">THE SAGE ETHOS</span>
                         </div>
-                        <h2 className="font-headline text-4xl md:text-5xl text-[#191c1c] leading-tight tracking-tight mb-10">
-                            Resilient structures harmonized with organic environments.
+                        <h2 className="font-headline text-4xl md:text-5xl text-[#191c1c] leading-tight tracking-tight mb-10 uppercase">
+                            Designing sustainable futures through visionary architecture and green environment design.
                         </h2>
-                        <div className="font-mono text-[10px] text-[#737780] uppercase tracking-widest space-y-1">
-                            <div>REF_01: ENVIRONMENTAL INTEGRATION</div>
-                            <div>REF_02: MATERIAL CIRCULARITY</div>
-                        </div>
                     </div>
 
                     {/* Right column */}

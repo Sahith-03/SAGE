@@ -2,6 +2,7 @@ export interface Project {
   id: string;
   title: string;
   type: string;
+  tags: string[];
   location: string;
   lat: number;
   lng: number;
@@ -17,6 +18,7 @@ export const projects: Project[] = [
     id: '01',
     title: 'The Glass Pavilion',
     type: 'Residential',
+    tags: ['Glass', 'Concrete', 'Modern'],
     location: 'Pacific Northwest, USA',
     lat: 45.523062,
     lng: -122.676482,
@@ -30,6 +32,7 @@ export const projects: Project[] = [
     id: '02',
     title: 'Vertical Metabolism',
     type: 'Commercial',
+    tags: ['Sustainable', 'Skyscraper', 'Urban'],
     location: 'New York, USA',
     lat: 40.7128,
     lng: -74.0060,
@@ -43,6 +46,7 @@ export const projects: Project[] = [
     id: '03',
     title: 'Zenith Wellness Center',
     type: 'Healthcare',
+    tags: ['Cedar', 'Biophilic', 'Wellness'],
     location: 'London, UK',
     lat: 51.5074,
     lng: -0.1278,
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     id: '04',
     title: 'Azure Marine Lab',
     type: 'Research',
+    tags: ['Marine', 'Sustainable', 'Hydrodynamic'],
     location: 'Great Barrier Reef, Australia',
     lat: -18.2871,
     lng: 147.6992,
@@ -69,6 +74,7 @@ export const projects: Project[] = [
     id: '05',
     title: 'Desert Echo',
     type: 'Cultural',
+    tags: ['Subterranean', 'Stone', 'Passive'],
     location: 'Al-Ula, Saudi Arabia',
     lat: 26.6167,
     lng: 37.9167,

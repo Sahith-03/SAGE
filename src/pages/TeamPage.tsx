@@ -37,13 +37,13 @@ export default function TeamPage() {
                             <div className="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
                         </div>
                         <div className="grid grid-cols-2 gap-px bg-outline-variant">
-                            <div className="bg-surface p-6">
-                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Education</span>
-                                <span className="font-label text-xs font-bold text-primary">NIT Calicut</span>
+                            <div className="bg-surface p-6 border-r border-outline-variant">
+                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2 font-bold">Education</span>
+                                <span className="font-label text-sm font-bold text-primary">NIT Calicut<br />B.Arch</span>
                             </div>
                             <div className="bg-surface p-6">
-                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2">Design Focus</span>
-                                <span className="font-label text-xs font-bold text-primary">Sustainable Performance</span>
+                                <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-2 font-bold">Design Focus</span>
+                                <span className="font-label text-sm font-bold text-primary">Sustainable Performance</span>
                             </div>
                         </div>
                     </div>
@@ -55,10 +55,10 @@ export default function TeamPage() {
                             <h2 className="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Ar. Nerella Manoj Vamsi</h2>
                             <div className="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
                                 <p>
-                                    An award-winning architect and alumnus of the National Institute of Technology Calicut, Manoj Vamsi brings over five years of professional experience across residential, commercial, institutional, and urban-scale projects. His work is grounded in sustainability, performance-driven design, and deep contextual responsiveness.
+                                    An alumnus of NIT Calicut, the founder of SAGE Design Labs is an award-winning architect and educator with a strong foundation in design and research. With experience across diverse building typologies and scales, his work reflects a balance of technical precision and design thinking.
                                 </p>
                                 <p>
-                                    He founded SAGE Design Labs with the objective of delivering architecture that is environmentally responsible, strategically planned, and future-ready—rooted in the belief that architecture must go beyond form-making, serving as a structured response to climate, culture, function, and long-term impact.
+                                    He brings global exposure and a multidisciplinary approach to practice integrating architecture, urban systems, and sustainability into cohesive design solutions. Alongside practice, he continues to mentor and shape future designers, bridging academia and industry.
                                 </p>
                                 <div className="relative inline-block group">
                                     <button className="phi-trigger flex items-center gap-4 text-primary font-bold uppercase tracking-widest text-xs border-b border-primary pb-2 hover:text-secondary transition-colors group">
@@ -80,16 +80,16 @@ export default function TeamPage() {
 
                                 <div className="mt-16 pt-16 border-t border-outline-variant grid grid-cols-3 gap-8">
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">5+</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Yrs Experience</span>
+                                        <span className="block font-headline text-4xl text-primary mb-1">5+</span>
+                                        <span className="font-body text-xs uppercase tracking-widest text-slate-500 font-black">Yrs Experience</span>
                                     </div>
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">Multi</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Typologies</span>
+                                        <span className="block font-headline text-4xl text-primary mb-1">Multi</span>
+                                        <span className="font-body text-xs uppercase tracking-widest text-slate-500 font-black">Typologies</span>
                                     </div>
                                     <div>
-                                        <span className="block font-headline text-3xl text-primary mb-1">NIT</span>
-                                        <span className="font-body text-[10px] uppercase tracking-widest text-slate-500 font-bold">Calicut Alumni</span>
+                                        <span className="block font-headline text-4xl text-primary mb-1">NIT</span>
+                                        <span className="font-body text-xs uppercase tracking-widest text-slate-500 font-black">Calicut Alumni</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ export default function TeamPage() {
                             <h2 className="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Pragada Lakshmi Priya</h2>
                             <div className="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
                                 <p>
-                                    Lakshmi Priya brings a critical eye for spatial narrative and tectonic detail. Her expertise lies in the seamless integration of interior environments with architectural shells, focusing on human-centric design.
+                                    Believing that strong design creates meaningful impact and leaves a lasting legacy, her work at SAGE Design Labs spans disciplines and scales, crafting spaces that are bold in expression, meticulous in detail, and rooted in a sensitive understanding of context, materiality, and human experience.
                                 </p>
                                 {/* Influence Map Trigger */}
                                 <div className="flex justify-end relative">
@@ -165,26 +165,10 @@ export default function TeamPage() {
             <section className="mt-16 py-16 border-t border-outline-variant">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     <div className="md:col-span-2">
-                        <h3 className="font-headline text-3xl text-primary mb-6">The SAGE Standard</h3>
-                        <p className="font-body text-on-surface-variant font-light leading-relaxed">
-                            Our team operates as a single organism, utilizing BIM level 3 integration and parametric modeling to ensure every design choice is backed by environmental data.
+                        <h3 className="font-headline text-4xl text-primary mb-6">The SAGE Standard</h3>
+                        <p className="font-body text-xl text-on-surface-variant font-light leading-relaxed">
+                            Our team operates as a single organism, utilizing advanced BIM integration and parametric modeling to ensure every design choice is backed by environmental data and structural integrity.
                         </p>
-                    </div>
-                    <div className="space-y-6">
-                        <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-secondary">Tech Stack</div>
-                        <ul className="font-label text-xs text-on-surface-variant space-y-3 font-medium">
-                            <li>Rhino + Grasshopper</li>
-                            <li>Revit (LOD 400)</li>
-                            <li>Ladybug Tools</li>
-                        </ul>
-                    </div>
-                    <div className="space-y-6">
-                        <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-secondary">Commitments</div>
-                        <ul className="font-label text-xs text-on-surface-variant space-y-3 font-medium">
-                            <li>2030 Challenge</li>
-                            <li>Circular Economy</li>
-                            <li>Biophilic Integration</li>
-                        </ul>
                     </div>
                 </div>
             </section>

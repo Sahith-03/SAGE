@@ -122,20 +122,35 @@ export default function Layout() {
                 <div className="max-w-screen-2xl mx-auto px-10 md:px-16 py-10 flex flex-col md:flex-row items-start justify-between gap-8">
                     {/* Left */}
                     <div>
-                        <div className="font-headline text-2xl text-[#002d56] uppercase tracking-widest font-bold mb-3">SAGE</div>
+                        <div className="font-headline text-2xl text-[#002d56] uppercase tracking-widest font-bold mb-3">SAGE Design Labs</div>
                         <p className="font-mono text-[10px] text-[#42474f] uppercase tracking-widest leading-relaxed max-w-xs">
                             © 2024 SAGE DESIGN LABS.<br />
-                            RESILIENT STRUCTURES HARMONIZED WITH<br />
-                            ORGANIC ENVIRONMENTS.
+                            SUSTAINABLE ARCHITECTURE &<br />
+                            GREEN ENVIRONMENT DESIGN LABS.
                         </p>
-                        <p className="font-mono text-[10px] text-[#737780] uppercase tracking-widest mt-3">V.2.4.0_STABLE // BUILD_ARCHITERRA</p>
+                        <div className="flex gap-4 mt-6">
+                            <a href="https://www.instagram.com/sage_designlabs?igsh=NWw4dzhuNzY4cHUx" target="_blank" rel="noopener noreferrer" className="text-[#002d56] hover:scale-110 transition-transform">
+                                <i className="fa-brands fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" className="text-[#002d56] hover:scale-110 transition-transform">
+                                <i className="fa-brands fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="mailto:sagedesignlabs@gmail.com" className="text-[#002d56] hover:scale-110 transition-transform">
+                                <i className="fa-regular fa-envelope text-xl"></i>
+                            </a>
+                            <a href="https://wa.me/#" className="text-[#002d56] hover:scale-110 transition-transform">
+                                <i className="fa-brands fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                        <p className="font-mono text-[10px] text-[#737780] uppercase tracking-widest mt-6">V.2.4.0_STABLE // BUILD_ARCHITERRA</p>
                     </div>
                     {/* Right links */}
                     <div className="flex flex-wrap gap-x-10 gap-y-2 font-mono text-[10px] text-[#42474f] uppercase tracking-widest">
-                        <Link to="#" className="hover:text-[#002d56] transition-colors">SUSTAINABILITY_REPORT.PDF</Link>
-                        <Link to="#" className="hover:text-[#002d56] transition-colors">PRIVACY_POLICY</Link>
-                        <Link to="#" className="hover:text-[#002d56] transition-colors">PRESS_KIT</Link>
+                        <Link to="/about" className="hover:text-[#002d56] transition-colors">ABOUT</Link>
+                        <Link to="/projects" className="hover:text-[#002d56] transition-colors">PROJECTS</Link>
+                        <Link to="/contact" className="hover:text-[#002d56] transition-colors">CONTACT</Link>
                         <Link to="/careers" className="hover:text-[#002d56] transition-colors">CAREERS.EXE</Link>
+                        <Link to="#" className="hover:text-[#002d56] transition-colors">PRIVACY_POLICY</Link>
                     </div>
                 </div>
             </footer>

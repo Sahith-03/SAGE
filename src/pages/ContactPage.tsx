@@ -63,39 +63,42 @@ export default function ContactPage() {
                         <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                                 <div className="relative">
-                                    <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 mb-2 block" htmlFor="firstName">Principal Lead: First Name</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-sm font-body transition-colors placeholder:text-slate-300 outline-none" id="firstName" placeholder="e.g. MARCUS" required type="text" />
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="firstName">First Name</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="firstName" placeholder="e.g. MARCUS" required type="text" />
                                 </div>
                                 <div className="relative">
-                                    <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 mb-2 block" htmlFor="lastName">Principal Lead: Last Name</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-sm font-body transition-colors placeholder:text-slate-300 outline-none" id="lastName" placeholder="e.g. AURELIUS" required type="text" />
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="lastName">Last Name</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="lastName" placeholder="e.g. AURELIUS" required type="text" />
                                 </div>
-                                <div className="relative md:col-span-2">
-                                    <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 mb-2 block" htmlFor="email">Communication Channel: Email Address</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-sm font-body transition-colors outline-none" id="email" placeholder="OFFICE@DOMAIN.COM" required type="email" />
+                                <div className="relative">
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="email">Email Address</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="OFFICE@DOMAIN.COM" required type="email" />
+                                </div>
+                                <div className="relative">
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="phone">Contact Number</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 XXXXX XXXXX" required type="tel" />
                                 </div>
                             </div>
 
                             <h2 className="text-xs font-mono text-slate-500 uppercase tracking-[0.4em] pt-8 mb-12 border-t border-slate-200">02 // Site &amp; Scope</h2>
                             <div className="space-y-10">
                                 <div className="relative">
-                                    <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 mb-2 block" htmlFor="subject">Project Designation / Type</label>
-                                    <select className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-sm font-body transition-colors outline-none">
-                                        <option>RESIDENTIAL ADAPTATION</option>
-                                        <option>COMMERCIAL MASTERPLAN</option>
-                                        <option>CULTURAL HUB</option>
-                                        <option>EXPERIMENTAL STRUCTURE</option>
-                                    </select>
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="projectType">Project Designation / Type</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="projectType" placeholder="e.g. RESIDENTIAL, COMMERCIAL, ETC." required type="text" />
                                 </div>
                                 <div className="relative">
-                                    <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 mb-2 block" htmlFor="message">Design Brief &amp; Site Parameters</label>
-                                    <textarea className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-sm font-body resize-none transition-colors outline-none" id="message" placeholder="DESCRIBE SITE CONDITIONS, PROGRAMMATIC REQUIREMENTS, AND SUSTAINABILITY GOALS..." required rows={4}></textarea>
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="siteAddress">Site Address</label>
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="siteAddress" placeholder="ENTER SITE LOCATION..." required type="text" />
+                                </div>
+                                <div className="relative">
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="message">Design Brief &amp; Site Parameters</label>
+                                    <textarea className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body resize-none transition-colors outline-none font-medium" id="message" placeholder="DESCRIBE PROGRAMMATIC REQUIREMENTS AND SUSTAINABILITY GOALS..." required rows={4}></textarea>
                                 </div>
                             </div>
 
-                            <button className="w-full md:w-auto bg-primary text-white px-12 py-5 rounded-none font-mono uppercase tracking-[0.2em] text-[10px] hover:bg-[#124376] transition-all inline-flex items-center justify-center space-x-4 border border-primary" type="submit">
-                                <span>TRANSMIT PROPOSAL</span>
-                                <span className="material-symbols-outlined text-sm">send</span>
+                            <button className="w-full md:w-auto bg-primary text-white px-12 py-5 rounded-none font-mono uppercase tracking-[0.2em] text-xs hover:bg-[#124376] transition-all inline-flex items-center justify-center space-x-4 border border-primary font-bold" type="submit">
+                                <span>SUBMIT PROPOSAL</span>
+                                <span className="material-symbols-outlined text-base">send</span>
                             </button>
                         </form>
                     </div>
@@ -109,12 +112,16 @@ export default function ContactPage() {
                             <h3 className="text-xs font-mono uppercase tracking-[0.3em] mb-8 border-b border-white/20 pb-4">Global Hub</h3>
                             <div className="space-y-8 relative z-10">
                                 <div>
-                                    <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Coordination Office</p>
-                                    <p className="text-sm font-body leading-relaxed">100 Sustainable Way<br />Floor 04, Suite 400<br />Seattle, WA 98101</p>
+                                    <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Hyderabad Office</p>
+                                    <p className="text-xs font-body leading-relaxed">C9CM+6V4, Old Mumbai Hwy,<br />LIG Chitrapuri Colony, Radhe Nagar,<br />Gachibowli, Rai Durg, Hyderabad,<br />Telangana 500104</p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Direct Channel</p>
-                                    <p className="text-sm font-body">+1 (206) 555-0123</p>
+                                    <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Vijayawada Office</p>
+                                    <p className="text-xs font-body leading-relaxed">59A-8/8-8 Maruthi Co-operative Colony Road, 1,<br />Guru Nanak Colony Road, beside Cafe Coffee Day,<br />Vijayawada, Andhra Pradesh 520008</p>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Direct Channels</p>
+                                    <p className="text-sm font-body">+91 XXXXX XXXXX<br />sagedesignlabs@gmail.com</p>
                                 </div>
                             </div>
                         </div>

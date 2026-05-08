@@ -47,6 +47,10 @@ export default function AboutPage() {
                 .spec-border {
                     border: 1px solid #c3c6d1;
                 }
+                .technical-marker {
+                    position: absolute;
+                    z-index: 20;
+                }
                 .technical-marker::before {
                     content: '';
                     position: absolute;
@@ -54,7 +58,6 @@ export default function AboutPage() {
                     height: 8px;
                     border: 1px solid #737780;
                     background: white;
-                    z-index: 20;
                 }
                 .marker-tl::before { top: -4px; left: -4px; }
                 .marker-tr::before { top: -4px; right: -4px; }
@@ -72,10 +75,6 @@ export default function AboutPage() {
             {/* Header/Hero: Spec Sheet Style */}
             <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-8">
                 <div className="relative spec-border p-1 lg:p-12 bg-white/50 backdrop-blur-sm">
-                    <div className="technical-marker marker-tl"></div>
-                    <div className="technical-marker marker-tr"></div>
-                    <div className="technical-marker marker-bl"></div>
-                    <div className="technical-marker marker-br"></div>
                     
                     <div className="flex flex-col lg:flex-row gap-12">
                         <div className="w-full lg:w-1/2 space-y-8 relative">
@@ -85,8 +84,7 @@ export default function AboutPage() {
                                     <h2 className="font-headline text-sm uppercase tracking-[0.3em] text-secondary font-bold">Studio Overview</h2>
                                 </div>
                                 <div className="text-[10px] font-sans text-right text-outline">
-                                    COORD: 40.7128° N, 74.0060° W<br />
-                                    DATE: OCT 2024
+                                    COORD: 40.7128° N, 74.0060° W
                                 </div>
                             </div>
                             <h1 className="font-headline text-6xl lg:text-8xl text-primary leading-[0.9] tracking-tighter">
@@ -101,11 +99,11 @@ export default function AboutPage() {
                             <div className="grid grid-cols-2 gap-4 mt-12">
                                 <div className="border border-outline-variant/30 p-4">
                                     <span className="text-[10px] uppercase tracking-widest text-outline block mb-2">Primary Objective</span>
-                                    <span className="text-xs font-bold text-primary">Environmental Symbiosis</span>
+                                    <span className="text-xs font-bold text-primary">Scalable Urban Evolution</span>
                                 </div>
                                 <div className="border border-outline-variant/30 p-4">
                                     <span className="text-[10px] uppercase tracking-widest text-outline block mb-2">Core Philosophy</span>
-                                    <span className="text-xs font-bold text-primary">Structural Organicism</span>
+                                    <span className="text-xs font-bold text-primary">Sustainability & Modernism</span>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +113,7 @@ export default function AboutPage() {
                                 <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-primary"></div>
                                 <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-primary"></div>
                                 <div className="relative overflow-hidden aspect-[4/5]">
-                                    <img alt="SAGE Sustainable Architecture" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=2000&auto=format&fit=crop" />
+                                    <img alt="SAGE Sustainable Architecture" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src={`${import.meta.env.BASE_URL}images/about-hero.png`} />
                                     <div className="absolute bottom-0 left-0 bg-primary text-white p-6 w-full lg:w-auto">
                                         <span className="material-symbols-outlined text-secondary-fixed mb-2">architecture</span>
                                         <p className="text-sm font-headline italic">Precision in every detail, harmony in every space.</p>
@@ -150,73 +148,111 @@ export default function AboutPage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <div className="interactive-card spec-border p-12 bg-primary text-on-primary flex flex-col justify-between min-h-[500px] relative overflow-hidden">
-                            <div className="technical-marker marker-tl"></div>
-                            <div className="technical-marker marker-br"></div>
                             <div className="absolute top-0 right-0 w-32 h-32 opacity-10 border-r border-t border-white"></div>
                             <div className="absolute top-12 right-12 w-16 h-16 opacity-10 border-r border-t border-white"></div>
                             <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <span className="text-[10px] font-sans uppercase tracking-widest text-secondary-fixed">Module: 01A</span>
-                                    <span className="h-[1px] w-12 bg-secondary-fixed opacity-30"></span>
+                                <div className="min-h-[100px]">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="text-[10px] font-sans uppercase tracking-widest text-secondary-fixed">Module: 01A</span>
+                                        <span className="h-[1px] w-12 bg-secondary-fixed opacity-30"></span>
+                                    </div>
+                                    <div className="inline-flex items-center space-x-3 mb-6">
+                                        <span className="material-symbols-outlined text-secondary-fixed text-sm">visibility</span>
+                                        <h3 className="font-body uppercase tracking-[0.2em] text-secondary-fixed text-xs font-bold">Our Vision</h3>
+                                    </div>
                                 </div>
-                                <div className="inline-flex items-center space-x-3 mb-6">
-                                    <span className="material-symbols-outlined text-secondary-fixed text-sm">visibility</span>
-                                    <h3 className="font-body uppercase tracking-[0.2em] text-secondary-fixed text-xs font-bold">Our Vision</h3>
-                                </div>
-                                <p className="font-headline text-4xl lg:text-5xl leading-tight tracking-tight">
-                                    To redefine the urban horizon as a thriving ecosystem.
+                                <p className="font-headline text-2xl lg:text-3xl leading-tight tracking-tight max-w-xl">
+                                    To shape intelligent and sustainable built ecosystems that drive scalable growth, urban resilience, and meaningful societal transformation.
                                 </p>
                             </div>
-                            <div className="relative z-10 font-body text-primary-fixed-dim text-lg leading-relaxed max-w-sm mt-8">
-                                We envision a future where monolithic structures are indistinguishable from natural topography. A world where design anticipates the needs of the next century.
+                            <div className="relative z-10 font-body text-primary-fixed-dim text-base leading-relaxed mt-8">
+                                <p>We envision a future where architectural innovation meets social responsibility, creating a lasting legacy of balance and prosperity.</p>
                             </div>
                         </div>
 
                         <div className="interactive-card spec-border p-12 bg-white text-on-surface flex flex-col justify-between min-h-[500px] relative">
-                            <div className="technical-marker marker-tr"></div>
-                            <div className="technical-marker marker-bl"></div>
                             <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <span className="text-[10px] font-sans uppercase tracking-widest text-outline">Module: 01B</span>
-                                    <span className="h-[1px] w-12 bg-outline-variant opacity-30"></span>
+                                <div className="min-h-[100px]">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="text-[10px] font-sans uppercase tracking-widest text-outline">Module: 01B</span>
+                                        <span className="h-[1px] w-12 bg-outline-variant opacity-30"></span>
+                                    </div>
+                                    <div className="inline-flex items-center space-x-3 mb-6">
+                                        <span className="material-symbols-outlined text-secondary text-sm">flag</span>
+                                        <h3 className="font-body uppercase tracking-[0.2em] text-secondary text-xs font-bold">Our Mission</h3>
+                                    </div>
                                 </div>
-                                <div className="inline-flex items-center space-x-3 mb-6">
-                                    <span className="material-symbols-outlined text-secondary text-sm">flag</span>
-                                    <h3 className="font-body uppercase tracking-[0.2em] text-secondary text-xs font-bold">Our Mission</h3>
-                                </div>
-                                <p className="font-headline text-4xl text-primary leading-tight tracking-tight">
-                                    Engineering spaces that breathe, endure, and inspire.
+                                <p className="font-headline text-2xl lg:text-3xl text-primary leading-tight tracking-tight max-w-xl">
+                                    Our mission is to foster collaborative innovation and drive regenerative growth through visionary, sustainable, and future-focused built environments.
                                 </p>
                             </div>
-                            <div className="space-y-6 font-body text-on-surface-variant text-base leading-relaxed mt-8">
-                                <p>We are committed to delivering architectural solutions that are rigorous in technical execution and profound in aesthetic impact.</p>
-                                <p className="text-xs uppercase tracking-widest font-bold text-primary flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                                    Transforming constraints into opportunities
-                                </p>
+                            <div className="relative z-10 font-body text-on-surface-variant text-base leading-relaxed mt-8">
+                                <p>We are dedicated to pushing the boundaries of architectural design while ensuring every project contributes positively to the global ecosystem.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Detailed Section */}
-            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-32">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 spec-border bg-white">
-                    <div className="p-12 border-b lg:border-b-0 lg:border-r border-outline-variant flex flex-col gap-6">
-                        <span className="text-3xl font-headline text-secondary">01.</span>
-                        <h4 className="font-bold text-sm uppercase tracking-widest">Resilience Analysis</h4>
-                        <p className="text-sm text-on-surface-variant leading-relaxed">Advanced structural simulations to ensure longevity against changing environmental pressures.</p>
+            {/* Why SAGE? */}
+            <section className="w-full py-32 px-6 lg:px-12 bg-white">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                    <div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-8 h-px bg-[#002d56]"></div>
+                            <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-[0.3em] font-bold">DIFFERENTIATION</span>
+                        </div>
+                        <h2 className="font-headline text-5xl lg:text-7xl text-primary leading-none tracking-tighter mb-10">Why SAGE?</h2>
+                        <div className="space-y-8">
+                            <div className="flex gap-6">
+                                <span className="font-headline text-2xl text-secondary">01.</span>
+                                <div>
+                                    <h4 className="font-bold text-base uppercase tracking-widest mb-2">Holistic Integration</h4>
+                                    <p className="text-on-surface-variant leading-relaxed">We don't just build structures; we design ecosystems. Our approach considers the symbiotic relationship between architecture, ecology, and human experience.</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-6">
+                                <span className="font-headline text-2xl text-secondary">02.</span>
+                                <div>
+                                    <h4 className="font-bold text-base uppercase tracking-widest mb-2">Future-Proof Innovation</h4>
+                                    <p className="text-on-surface-variant leading-relaxed">Utilizing cutting-edge sustainable materials and technologies, we ensure our designs endure and perform for generations to come.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="p-12 border-b lg:border-b-0 lg:border-r border-outline-variant flex flex-col gap-6 bg-surface-container-low/30">
-                        <span className="text-3xl font-headline text-secondary">02.</span>
-                        <h4 className="font-bold text-sm uppercase tracking-widest">Organic Integration</h4>
-                        <p className="text-sm text-on-surface-variant leading-relaxed">Developing proprietary methods for embedding living biological systems into masonry and glass.</p>
+                    <div className="aspect-[4/3] bg-surface-container-low overflow-hidden relative border border-outline-variant">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop" alt="Why SAGE" className="w-full h-full object-cover grayscale opacity-80" />
+                        <div className="absolute inset-0 bg-[#002d56]/10"></div>
                     </div>
-                    <div className="p-12 flex flex-col gap-6">
-                        <span className="text-3xl font-headline text-secondary">03.</span>
-                        <h4 className="font-bold text-sm uppercase tracking-widest">Material Ethics</h4>
-                        <p className="text-sm text-on-surface-variant leading-relaxed">Hyper-local sourcing and cradle-to-cradle material cycles for zero-waste construction.</p>
+                </div>
+            </section>
+
+            {/* Academic Initiative */}
+            <section className="w-full py-32 px-6 lg:px-12 bg-surface-container-low/30 border-y border-outline-variant/30">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex items-center gap-3 mb-16">
+                        <div className="w-8 h-px bg-secondary"></div>
+                        <span className="font-mono text-[10px] text-secondary uppercase tracking-[0.3em] font-bold">KNOWLEDGE EXCHANGE</span>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                        <div className="lg:col-span-4">
+                            <h2 className="font-headline text-5xl text-primary leading-none tracking-tighter">Academic Initiative</h2>
+                        </div>
+                        <div className="lg:col-span-8">
+                            <p className="font-body text-lg text-on-surface-variant leading-relaxed mb-10">
+                                SAGE Academic Initiative is our platform for fostering the next generation of visionary architects. We collaborate with leading institutions to bridge the gap between academic theory and professional practice.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="p-8 bg-white border border-outline-variant">
+                                    <h5 className="font-bold text-sm uppercase tracking-widest mb-4">Research Labs</h5>
+                                    <p className="text-sm text-on-surface-variant leading-relaxed">Collaborative research on regenerative materials and urban sustainability metrics.</p>
+                                </div>
+                                <div className="p-8 bg-white border border-outline-variant">
+                                    <h5 className="font-bold text-sm uppercase tracking-widest mb-4">Workshop Series</h5>
+                                    <p className="text-sm text-on-surface-variant leading-relaxed">Intensive hands-on sessions focusing on advanced digital fabrication and site-specific logic.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -231,7 +267,7 @@ export default function AboutPage() {
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center px-6">
                     <h5 className="text-primary font-headline text-3xl md:text-5xl italic tracking-tight mb-4">
-                        The harmony of structure and soul.
+                        The harmony of design and soul.
                     </h5>
                     <div className="flex items-center gap-4">
                         <div className="w-8 h-[1px] bg-secondary"></div>
