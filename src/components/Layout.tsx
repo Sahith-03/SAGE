@@ -4,11 +4,13 @@ import { useEffect, useState, useRef } from 'react';
 export default function Layout() {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const cursorRef = useRef<HTMLDivElement>(null);
     const { pathname } = useLocation();
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setIsMenuOpen(false);
     }, [pathname]);
 
     useEffect(() => {
@@ -22,9 +24,7 @@ export default function Layout() {
         let rafId: number;
         const handleMouseMove = (e: MouseEvent) => {
             if (cursorRef.current) {
-                // Cancel previous requestAnimationFrame
                 if (rafId) cancelAnimationFrame(rafId);
-                // Update position smoothly
                 rafId = requestAnimationFrame(() => {
                     if (cursorRef.current) {
                         cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
@@ -54,21 +54,57 @@ export default function Layout() {
         };
     }, []);
 
-    // Active style helper for NavLinks
     const getNavLinkClass = ({ isActive }: { isActive: boolean }) => 
         `transition-all duration-300 pb-0.5 ${isActive ? 'text-[#002d56] border-b-2 border-[#002d56]' : 'text-[#42474f] hover:text-[#002d56]'}`;
 
     return (
-        <div className="flex flex-col min-h-screen font-body text-on-background bg-background cursor-none">
-            {/* Dynamic Cursor */}
+        <div className="flex flex-col min-h-screen font-body text-on-background bg-background lg:cursor-none">
+            {/* Dynamic Cursor — desktop only */}
             <div
                 ref={cursorRef}
-                className="fixed top-0 left-0 pointer-events-none z-[9999]"
+                className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9999]"
                 style={{ transform: 'translate3d(-100px, -100px, 0)' }}
             >
                 <div className={`rounded-full border border-[#002d56] transition-all duration-300 ease-out flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 ${isHovering ? 'w-12 h-12 bg-[#002d56]/10 backdrop-blur-sm' : 'w-6 h-6'}`}>
                     <div className={`w-1 h-1 bg-[#002d56] rounded-full transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}></div>
                 </div>
+            </div>
+
+            {/* Mobile Nav Overlay */}
+            <div className={`fixed inset-0 z-[200] bg-[#f8f9f9] flex flex-col items-center justify-center gap-0 transition-transform duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <button onClick={() => setIsMenuOpen(false)} className="absolute top-4 right-5 text-[#002d56] p-2">
+                    <span className="material-symbols-outlined text-3xl">close</span>
+                </button>
+                {[
+                    { to: '/', label: 'HOME', end: true },
+                    { to: '/about', label: 'ABOUT' },
+                    { to: '/projects', label: 'PROJECTS' },
+                    { to: '/team', label: 'TEAM' },
+                    { to: '/blogs', label: 'BLOGS' },
+                    { to: '/careers', label: 'CAREERS' },
+                    { to: '/contact', label: 'CONTACT' },
+                ].map(({ to, label, end }) => (
+                    <NavLink
+                        key={to}
+                        to={to}
+                        end={end}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={({ isActive }) =>
+                            `w-full text-center py-5 font-mono text-sm uppercase tracking-[0.3em] border-b border-[#e1e3e3] ${
+                                isActive ? 'text-[#002d56] font-bold' : 'text-[#42474f]'
+                            }`
+                        }
+                    >
+                        {label}
+                    </NavLink>
+                ))}
+                <Link
+                    to="/contact"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="mt-8 bg-[#002d56] text-white px-10 py-4 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors"
+                >
+                    START A PROJECT
+                </Link>
             </div>
 
             {/* Scroll Progress Bar */}
@@ -79,10 +115,8 @@ export default function Layout() {
                 ></div>
             </div>
 
-            {/* TopNavBar — matches Stitch exactly */}
             <nav className="fixed top-[3px] w-full z-50 bg-[#f8f9f9]/95 backdrop-blur-sm border-b border-[#e1e3e3]">
-                <div className="flex justify-between items-center px-10 md:px-16 h-[60px] w-full max-w-screen-2xl mx-auto">
-                    {/* Logo */}
+                <div className="flex justify-between items-center px-5 md:px-10 lg:px-16 h-[60px] w-full max-w-screen-2xl mx-auto">
                     <Link to="/" className="flex items-center group h-full">
                         <img 
                             src={`${import.meta.env.BASE_URL}images/logo-remove-bg.png`} 
@@ -91,7 +125,6 @@ export default function Layout() {
                         />
                     </Link>
 
-                    {/* Nav links */}
                     <div className="hidden lg:flex items-center gap-10 font-mono text-[11px] uppercase tracking-widest">
                         <NavLink to="/" end className={getNavLinkClass}>HOME</NavLink>
                         <NavLink to="/about" className={getNavLinkClass}>ABOUT</NavLink>
@@ -102,25 +135,21 @@ export default function Layout() {
                         <NavLink to="/contact" className={getNavLinkClass}>CONTACT</NavLink>
                     </div>
 
-                    {/* CTA button */}
-                    <Link to="/contact" className="hidden md:block bg-[#002d56] text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors">
+                    <Link to="/contact" className="hidden lg:block bg-[#002d56] text-white px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest hover:bg-[#124376] transition-colors">
                         START A PROJECT
                     </Link>
-                    <div className="lg:hidden text-[#002d56]">
+                    <button onClick={() => setIsMenuOpen(true)} className="lg:hidden text-[#002d56] p-2 -mr-2">
                         <span className="material-symbols-outlined text-2xl">menu</span>
-                    </div>
+                    </button>
                 </div>
             </nav>
 
-            {/* Page top offset for fixed nav */}
             <div className="pt-[59px] flex-grow">
                 <Outlet />
             </div>
 
-            {/* Footer — matches Stitch */}
             <footer className="bg-[#d9dada] border-t border-[#c3c6d1]">
-                <div className="max-w-screen-2xl mx-auto px-10 md:px-16 py-10 flex flex-col md:flex-row items-start justify-between gap-8">
-                    {/* Left */}
+                <div className="max-w-screen-2xl mx-auto px-5 md:px-10 lg:px-16 py-10 flex flex-col md:flex-row items-start justify-between gap-8">
                     <div>
                         <div className="font-headline text-2xl text-[#002d56] uppercase tracking-widest font-bold mb-3">SAGE Design Labs</div>
                         <p className="font-mono text-[10px] text-[#42474f] uppercase tracking-widest leading-relaxed max-w-xs">
@@ -144,7 +173,6 @@ export default function Layout() {
                         </div>
                         <p className="font-mono text-[10px] text-[#737780] uppercase tracking-widest mt-6">V.2.4.0_STABLE // BUILD_ARCHITERRA</p>
                     </div>
-                    {/* Right links */}
                     <div className="flex flex-wrap gap-x-10 gap-y-2 font-mono text-[10px] text-[#42474f] uppercase tracking-widest">
                         <Link to="/about" className="hover:text-[#002d56] transition-colors">ABOUT</Link>
                         <Link to="/projects" className="hover:text-[#002d56] transition-colors">PROJECTS</Link>

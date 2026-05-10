@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
 import worldData from '../data/world.json';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface ProjectGlobeProps {
+  projects: Project[];
   onProjectClick: (project: Project) => void;
 }
 
@@ -46,7 +46,7 @@ export default function ProjectGlobeWrapper(props: ProjectGlobeProps) {
 }
 
 // ── Inner Globe ───────────────────────────────────────────────────────────────
-function ProjectGlobe({ onProjectClick }: ProjectGlobeProps) {
+function ProjectGlobe({ projects, onProjectClick }: ProjectGlobeProps) {
   const outerRef   = useRef<HTMLDivElement>(null);   // outer visible container
   const mountRef   = useRef<HTMLDivElement>(null);   // canvas mount point (absolute)
   const globeRef   = useRef<any>(null);
@@ -149,7 +149,7 @@ function ProjectGlobe({ onProjectClick }: ProjectGlobeProps) {
       // Clear any canvas left in mount node
       if (mountRef.current) mountRef.current.innerHTML = '';
     };
-  }, []); // run once
+  }, [projects]); // run when projects change
 
   return (
     <div ref={outerRef} className="relative w-full h-[450px] md:h-[650px] bg-[#000d1a] overflow-hidden rounded-sm border border-[#a4c8ff]/10 shadow-[0_0_80px_rgba(0,21,41,0.8)]">

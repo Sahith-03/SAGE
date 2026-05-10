@@ -47,7 +47,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-[#001a36]/50"></div>
 
                 {/* Hero content */}
-                <div className="relative z-10 flex flex-col justify-end h-full px-10 md:px-16 pb-20 max-w-screen-2xl mx-auto w-full">
+                <div className="relative z-10 flex flex-col justify-end h-full px-5 md:px-10 lg:px-16 pb-14 md:pb-20 max-w-screen-2xl mx-auto w-full">
                     {/* Section ID tag */}
                     <div className="flex items-center gap-3 mb-6">
                         <div className="w-8 h-px bg-white/60"></div>
@@ -58,10 +58,10 @@ export default function HomePage() {
 
                     {/* Main headline */}
                     <h1 className="font-headline text-white leading-[1.0] tracking-tight max-w-4xl">
-                        <span className="block text-5xl md:text-6xl lg:text-7xl font-normal">Designing architecture</span>
-                        <span className="block text-5xl md:text-6xl lg:text-7xl font-normal">that performs</span>
-                        <span className="block text-5xl md:text-6xl lg:text-7xl italic text-[#a4c8ff]">responsibly today</span>
-                        <span className="block text-3xl md:text-4xl lg:text-5xl font-normal uppercase tracking-widest text-white/80 mt-2">AND ENDURES MEANINGFULLY.</span>
+                        <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal">Designing architecture</span>
+                        <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-normal">that performs</span>
+                        <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-7xl italic text-[#a4c8ff]">responsibly today</span>
+                        <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal uppercase tracking-widest text-white/80 mt-2">AND ENDURES MEANINGFULLY.</span>
                     </h1>
 
                     {/* CTA buttons row */}
@@ -88,7 +88,7 @@ export default function HomePage() {
             </section>
 
             {/* ─── SAGE ETHOS ─── */}
-            <section className="bg-[#f8f9f9] px-10 md:px-16 py-24 max-w-screen-2xl mx-auto reveal-on-scroll">
+            <section className="bg-[#f8f9f9] px-5 md:px-10 lg:px-16 py-16 md:py-24 max-w-screen-2xl mx-auto reveal-on-scroll">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     {/* Left column */}
                     <div>
@@ -96,7 +96,7 @@ export default function HomePage() {
                             <div className="w-8 h-px bg-[#002d56]"></div>
                             <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-[0.3em] font-bold">THE SAGE ETHOS</span>
                         </div>
-                        <h2 className="font-headline text-4xl md:text-5xl text-[#191c1c] leading-tight tracking-tight mb-10 uppercase">
+                        <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl text-[#191c1c] leading-tight tracking-tight mb-10 uppercase">
                             Designing sustainable futures through visionary architecture and green environment design.
                         </h2>
                     </div>
@@ -122,15 +122,15 @@ export default function HomePage() {
             </section>
 
             {/* ─── SELECTED WORKS ─── */}
-            <section className="bg-[#f0f1f1] px-10 md:px-16 py-20">
+            <section className="bg-[#f0f1f1] px-5 md:px-10 lg:px-16 py-16 md:py-20">
                 {/* Header row */}
-                <div className="flex items-end justify-between mb-10 max-w-screen-2xl mx-auto">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end justify-between mb-10 max-w-screen-2xl mx-auto">
                     <div>
                         <div className="flex items-center gap-3 mb-3">
                             <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-widest font-bold">SELECTED WORKS</span>
                             <span className="font-mono text-[10px] text-[#737780]">[2021-2024]</span>
                         </div>
-                        <h2 className="font-headline text-5xl md:text-6xl text-[#191c1c] uppercase tracking-tight">BUILT ENVIRONMENTS</h2>
+                        <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl text-[#191c1c] uppercase tracking-tight">BUILT ENVIRONMENTS</h2>
                     </div>
                     <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-[#002d56] uppercase tracking-widest hover:opacity-70 transition-opacity">
                         VIEW ALL PROJECTS →
@@ -209,7 +209,7 @@ export default function HomePage() {
             </section>
 
             {/* ─── CTA SECTION ─── */}
-            <section className="bg-[#f8f9f9] py-32 px-10 md:px-16 flex flex-col items-center text-center reveal-on-scroll">
+            <section className="bg-[#f8f9f9] py-20 md:py-32 px-5 md:px-10 lg:px-16 flex flex-col items-center text-center reveal-on-scroll">
                 {/* Compass icon */}
                 <div className="mb-4">
                     <span className="font-mono text-[9px] text-[#737780] uppercase tracking-widest block mb-3">REF: CTA_77</span>
@@ -221,7 +221,7 @@ export default function HomePage() {
                     </svg>
                 </div>
 
-                <h2 className="font-headline text-5xl md:text-6xl lg:text-7xl text-[#002d56] tracking-tight max-w-3xl leading-tight mb-8">
+                <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#002d56] tracking-tight max-w-3xl leading-tight mb-8">
                     READY TO <strong>BUILD</strong> THE FUTURE?
                 </h2>
                 <p className="font-body text-lg text-[#42474f] max-w-xl mb-10 leading-relaxed">

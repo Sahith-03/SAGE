@@ -1,6 +1,6 @@
 export default function TeamPage() {
     return (
-        <main className="flex-grow pt-12 pb-16 px-6 md:px-12 max-w-screen-2xl mx-auto w-full blueprint-bg">
+        <main className="flex-grow pt-8 md:pt-12 pb-16 px-5 md:px-8 lg:px-12 max-w-screen-2xl mx-auto w-full blueprint-bg">
             <style>{`
                 .phi-popover {
                     opacity: 0;
@@ -20,7 +20,7 @@ export default function TeamPage() {
                     <span className="h-px w-12 bg-primary"></span>
                     <span className="font-label uppercase tracking-[0.3em] text-[10px] text-primary font-bold">Collaborative Intelligence</span>
                 </div>
-                <h1 className="font-headline text-5xl md:text-8xl font-light text-primary tracking-tight mb-8">The Minds at <span className="italic">SAGE</span></h1>
+                <h1 className="font-headline text-4xl sm:text-5xl md:text-8xl font-light text-primary tracking-tight mb-8">The Minds at <span className="italic">SAGE</span></h1>
                 <p className="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed font-light max-w-2xl border-l-2 border-primary-container pl-8">
                     A collective of visionary architects and designers dedicated to harmonizing resilient structures with organic environments.
                 </p>
@@ -32,7 +32,7 @@ export default function TeamPage() {
                     {/* Left: Portrait & Technical Info */}
                     <div className="lg:col-span-5 space-y-8">
                         <div className="relative group aspect-[4/5] overflow-hidden bg-surface-container-highest">
-                            <img alt="Ar. Nerella Manoj Vamsi" className="w-full h-full object-cover grayscale brightness-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" />
+                            <img alt="Ar. Nerella Manoj Vamsi" className="w-full h-full object-cover grayscale brightness-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src={`${import.meta.env.BASE_URL}images/Vamsi.png`} />
                             {/* Technical Overlay */}
                             <div className="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
                         </div>
@@ -52,7 +52,7 @@ export default function TeamPage() {
                     <div className="lg:col-span-7 pt-12">
                         <div className="max-w-xl">
                             <span className="font-label uppercase tracking-[0.4em] text-[10px] text-secondary font-black block mb-4">Founder &amp; Principal Architect</span>
-                            <h2 className="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Ar. Nerella Manoj Vamsi</h2>
+                            <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Ar. Nerella Manoj Vamsi</h2>
                             <div className="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
                                 <p>
                                     An alumnus of NIT Calicut, the founder of SAGE Design Labs is an award-winning architect and educator with a strong foundation in design and research. With experience across diverse building typologies and scales, his work reflects a balance of technical precision and design thinking.
@@ -78,7 +78,7 @@ export default function TeamPage() {
                                     </div>
                                 </div>
 
-                                <div className="mt-16 pt-16 border-t border-outline-variant grid grid-cols-3 gap-8">
+                                <div className="mt-12 md:mt-16 pt-16 border-t border-outline-variant grid grid-cols-3 gap-4 md:gap-8">
                                     <div>
                                         <span className="block font-headline text-4xl text-primary mb-1">5+</span>
                                         <span className="font-body text-xs uppercase tracking-widest text-slate-500 font-black">Yrs Experience</span>
@@ -103,9 +103,9 @@ export default function TeamPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                     {/* Left: Bio & Map */}
                     <div className="lg:col-span-7 order-2 lg:order-1 lg:pt-12">
-                        <div className="max-w-xl lg:ml-auto text-right">
+                        <div className="max-w-xl lg:ml-auto lg:text-right">
                             <span className="font-label uppercase tracking-[0.4em] text-[10px] text-secondary font-black block mb-4">Associate Architect</span>
-                            <h2 className="font-headline text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Pragada Lakshmi Priya</h2>
+                            <h2 className="font-headline text-4xl sm:text-5xl md:text-6xl text-primary font-medium mb-10 tracking-tight leading-none">Pragada Lakshmi Priya</h2>
                             <div className="space-y-8 font-body text-on-surface-variant text-lg leading-relaxed font-light">
                                 <p>
                                     Believing that strong design creates meaningful impact and leaves a lasting legacy, her work at SAGE Design Labs spans disciplines and scales, crafting spaces that are bold in expression, meticulous in detail, and rooted in a sensitive understanding of context, materiality, and human experience.
@@ -145,7 +145,7 @@ export default function TeamPage() {
                     {/* Right: Portrait & Technical Info */}
                     <div className="lg:col-span-5 order-1 lg:order-2 space-y-8">
                         <div className="relative group aspect-[4/5] overflow-hidden bg-surface-container-highest">
-                            <img alt="Pragada Lakshmi Priya" className="w-full h-full object-cover grayscale brightness-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" />
+                            <img alt="Pragada Lakshmi Priya" className="w-full h-full object-cover grayscale brightness-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src={`${import.meta.env.BASE_URL}images/Priya.png`} />
                             <div className="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
                         </div>
                         <div className="grid grid-cols-1 gap-px bg-outline-variant">

@@ -1,6 +1,6 @@
 export default function ContactPage() {
     return (
-        <main className="flex-grow pt-8 blueprint-bg">
+        <main className="flex-grow pt-6 md:pt-8 blueprint-bg">
             <style>{`
                 .scale-bar {
                     height: 2px;
@@ -18,7 +18,7 @@ export default function ContactPage() {
                 .scale-bar::after { right: 0; }
             `}</style>
             {/* Hero Section with Architectural Notes */}
-            <section className="py-12 px-6 md:px-12 max-w-7xl mx-auto relative">
+            <section className="py-10 md:py-12 px-5 md:px-8 lg:px-12 max-w-7xl mx-auto relative">
                 {/* Scale Bar Detail */}
                 <div className="absolute top-12 left-12 hidden lg:flex items-center space-x-4 text-slate-400">
                     <div className="scale-bar w-32"></div>
@@ -28,7 +28,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <span className="text-xs font-mono text-slate-500 uppercase tracking-[0.3em] mb-4 block">Ref No: SDL-CQ-2024</span>
-                        <h1 className="text-5xl md:text-7xl font-headline text-primary tracking-tight mb-6 leading-[0.9]">Project<br />Inquiry <span className="font-light italic text-slate-400">&amp;</span><br />Survey.</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline text-primary tracking-tight mb-6 leading-[0.9]">Project<br />Inquiry <span className="font-light italic text-slate-400">&amp;</span><br />Survey.</h1>
                         <p className="text-lg font-body text-slate-600 max-w-lg leading-relaxed border-l-2 border-primary/20 pl-6 py-2">
                             Submit your project parameters. Our studio evaluates inquiries based on site complexity, sustainability goals, and structural innovation potential.
                         </p>
@@ -46,10 +46,10 @@ export default function ContactPage() {
             </section>
 
             {/* Studio Inquiry Form */}
-            <section className="py-12 px-6 md:px-12 bg-white/40 backdrop-blur-sm border-t border-b border-slate-200">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16">
+            <section className="py-10 md:py-12 px-5 md:px-8 lg:px-12 bg-white/40 backdrop-blur-sm border-t border-b border-slate-200">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
                     {/* Form Card */}
-                    <div className="md:col-span-8 bg-white p-8 md:p-16 border border-slate-200 relative">
+                    <div className="md:col-span-8 bg-white p-6 md:p-10 lg:p-16 border border-slate-200 relative">
                         {/* North Arrow Detail */}
                         <div className="absolute top-0 right-0 p-4 opacity-20 hidden md:block">
                             <div className="w-16 h-16 flex items-center justify-center border border-primary rounded-full relative">
@@ -60,7 +60,7 @@ export default function ContactPage() {
 
                         <h2 className="text-xs font-mono text-slate-500 uppercase tracking-[0.4em] mb-12">01 // Primary Information</h2>
                         
-                        <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-10 md:space-y-12" onSubmit={(e) => e.preventDefault()}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="firstName">First Name</label>
@@ -145,7 +145,7 @@ export default function ContactPage() {
             </section>
 
             {/* Site Survey Map */}
-            <section className="h-[600px] w-full bg-slate-200 relative overflow-hidden border-t border-slate-200">
+            <section className="h-[300px] md:h-[500px] lg:h-[600px] w-full bg-slate-200 relative overflow-hidden border-t border-slate-200">
                 <div className="absolute inset-0 z-0">
                     <img alt="Site Survey Map" className="w-full h-full object-cover grayscale brightness-110 contrast-125 mix-blend-multiply opacity-50" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2000&auto=format&fit=crop" />
                     <div className="absolute inset-0 blueprint-bg opacity-20"></div>

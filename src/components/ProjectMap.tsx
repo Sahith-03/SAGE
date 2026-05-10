@@ -5,17 +5,17 @@ import {
   Geography,
   Marker
 } from "react-simple-maps";
-import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
 
 // Import local data to prevent any network or CORS issues
 import geoData from '../data/world.json';
 
 interface ProjectMapProps {
+  projects: Project[];
   onProjectClick: (project: Project) => void;
 }
 
-export default function ProjectMap({ onProjectClick }: ProjectMapProps) {
+export default function ProjectMap({ projects, onProjectClick }: ProjectMapProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
 
   return (

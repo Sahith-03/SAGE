@@ -73,8 +73,8 @@ export default function AboutPage() {
             `}</style>
             
             {/* Header/Hero: Spec Sheet Style */}
-            <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 pb-20 pt-8">
-                <div className="relative spec-border p-1 lg:p-12 bg-white/50 backdrop-blur-sm">
+            <section className="w-full max-w-7xl mx-auto px-5 md:px-6 lg:px-12 pb-12 md:pb-20 pt-8">
+                <div className="relative spec-border p-4 md:p-8 lg:p-12 bg-white/50 backdrop-blur-sm">
                     
                     <div className="flex flex-col lg:flex-row gap-12">
                         <div className="w-full lg:w-1/2 space-y-8 relative">
@@ -87,7 +87,7 @@ export default function AboutPage() {
                                     COORD: 40.7128° N, 74.0060° W
                                 </div>
                             </div>
-                            <h1 className="font-headline text-6xl lg:text-8xl text-primary leading-[0.9] tracking-tighter">
+                            <h1 className="font-headline text-5xl sm:text-6xl lg:text-8xl text-primary leading-[0.9] tracking-tighter">
                                 Built for <br />
                                 <span className="italic text-secondary">Tomorrow</span>
                             </h1>
@@ -126,8 +126,8 @@ export default function AboutPage() {
             </section>
 
             {/* Philosophy */}
-            <section className="w-full py-32 border-y border-outline-variant/30 bg-white/30">
-                <div className="max-w-5xl mx-auto px-6 text-center space-y-12">
+            <section className="w-full py-16 md:py-32 border-y border-outline-variant/30 bg-white/30">
+                <div className="max-w-5xl mx-auto px-5 md:px-6 text-center space-y-12">
                     <div className="inline-block px-4 py-1 border border-secondary text-secondary text-[10px] uppercase tracking-[0.4em] font-bold">The Manifesto</div>
                     <h2 className="font-headline text-3xl lg:text-5xl text-primary leading-tight tracking-tight">
                         SAGE (Sustainable Architecture and Green Environment) Design Labs is a collaborative design practice.
@@ -137,17 +137,17 @@ export default function AboutPage() {
                         <span className="material-symbols-outlined text-outline text-xl">eco</span>
                         <span className="h-[1px] flex-1 bg-outline-variant/50"></span>
                     </div>
-                    <p className="font-body text-xl lg:text-2xl text-on-surface-variant leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="font-body text-lg lg:text-xl xl:text-2xl text-on-surface-variant leading-relaxed max-w-3xl mx-auto font-light">
                         Our approach bridges the gap between the built environment and the natural world. Our methodology integrates architecture with the surrounding landscape, designing structures as a deliberate and harmonious extension of their context.
                     </p>
                 </div>
             </section>
 
             {/* Vision & Mission */}
-            <section className="w-full py-32 px-6 lg:px-12 bg-surface-container-lowest/50">
+            <section className="w-full py-16 md:py-32 px-5 md:px-6 lg:px-12 bg-surface-container-lowest/50">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        <div className="interactive-card spec-border p-12 bg-primary text-on-primary flex flex-col justify-between min-h-[500px] relative overflow-hidden">
+                        <div className="interactive-card spec-border p-8 md:p-12 bg-primary text-on-primary flex flex-col justify-between min-h-[400px] md:min-h-[500px] relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 opacity-10 border-r border-t border-white"></div>
                             <div className="absolute top-12 right-12 w-16 h-16 opacity-10 border-r border-t border-white"></div>
                             <div className="relative z-10">
@@ -170,7 +170,7 @@ export default function AboutPage() {
                             </div>
                         </div>
 
-                        <div className="interactive-card spec-border p-12 bg-white text-on-surface flex flex-col justify-between min-h-[500px] relative">
+                        <div className="interactive-card spec-border p-8 md:p-12 bg-white text-on-surface flex flex-col justify-between min-h-[400px] md:min-h-[500px] relative">
                             <div className="relative z-10">
                                 <div className="min-h-[100px]">
                                     <div className="flex items-center gap-4 mb-6">
@@ -195,14 +195,14 @@ export default function AboutPage() {
             </section>
 
             {/* Why SAGE? */}
-            <section className="w-full py-32 px-6 lg:px-12 bg-white">
+            <section className="w-full py-16 md:py-32 px-5 md:px-6 lg:px-12 bg-white">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-8 h-px bg-[#002d56]"></div>
                             <span className="font-mono text-[10px] text-[#002d56] uppercase tracking-[0.3em] font-bold">DIFFERENTIATION</span>
                         </div>
-                        <h2 className="font-headline text-5xl lg:text-7xl text-primary leading-none tracking-tighter mb-10">Why SAGE?</h2>
+                        <h2 className="font-headline text-4xl md:text-5xl lg:text-7xl text-primary leading-none tracking-tighter mb-10">Why SAGE?</h2>
                         <div className="space-y-8">
                             <div className="flex gap-6">
                                 <span className="font-headline text-2xl text-secondary">01.</span>
@@ -228,7 +228,7 @@ export default function AboutPage() {
             </section>
 
             {/* Academic Initiative */}
-            <section className="w-full py-32 px-6 lg:px-12 bg-surface-container-low/30 border-y border-outline-variant/30">
+            <section className="w-full py-16 md:py-32 px-5 md:px-6 lg:px-12 bg-surface-container-low/30 border-y border-outline-variant/30">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex items-center gap-3 mb-16">
                         <div className="w-8 h-px bg-secondary"></div>

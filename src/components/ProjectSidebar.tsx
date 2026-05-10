@@ -26,7 +26,7 @@ export default function ProjectSidebar({ project, onClose }: ProjectSidebarProps
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[600px] bg-white z-[101] shadow-2xl overflow-y-auto"
+            className="fixed top-0 right-0 h-full w-full sm:w-[480px] md:w-[600px] bg-white z-[101] shadow-2xl overflow-y-auto"
           >
             {/* Header / Close */}
             <div className="sticky top-0 bg-white/90 backdrop-blur-md z-10 flex justify-between items-center p-8 border-b border-outline-variant/20">
@@ -75,15 +75,15 @@ export default function ProjectSidebar({ project, onClose }: ProjectSidebarProps
                     </div>
                     <div className="space-y-1">
                       <span className="text-[9px] uppercase text-outline font-mono block">Coordinates</span>
-                      <span className="text-xs font-bold uppercase text-primary">{project.lat.toFixed(4)}° N, {project.lng.toFixed(4)}° E</span>
+                      <span className="text-xs font-bold uppercase text-primary">{(project.lat ?? 0).toFixed(4)}° N, {(project.lng ?? 0).toFixed(4)}° E</span>
                     </div>
                     <div className="space-y-1">
                       <span className="text-[9px] uppercase text-outline font-mono block">Scale_Magnitude</span>
-                      <span className="text-xs font-bold uppercase text-primary">{project.scale}</span>
+                      <span className="text-xs font-bold uppercase text-primary">{project.scale || 'N/A'}</span>
                     </div>
                     <div className="space-y-1">
                       <span className="text-[9px] uppercase text-outline font-mono block">Logic_System</span>
-                      <span className="text-xs font-bold uppercase text-primary">{project.logic}</span>
+                      <span className="text-xs font-bold uppercase text-primary">{project.logic || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function ProjectSidebar({ project, onClose }: ProjectSidebarProps
                     <button className="text-[9px] font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors">Export_PDF</button>
                     <button className="text-[9px] font-bold uppercase tracking-widest text-outline hover:text-primary transition-colors">Print_Specs</button>
                   </div>
-                  <span className="text-[8px] font-mono text-outline-variant uppercase">Registry_Entry: #{project.id}00X</span>
+                  <span className="text-[8px] font-mono text-outline-variant uppercase">Registry_Entry: #{project.id.substring(0, 6)}</span>
                 </div>
               </div>
             </div>

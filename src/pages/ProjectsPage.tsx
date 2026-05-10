@@ -1,12 +1,44 @@
 import { useEffect, useState } from 'react';
-import { projects } from '../data/projects';
 import type { Project } from '../data/projects';
+import { sanityClient, urlFor } from '../lib/sanity';
 import ProjectGlobe from '../components/ProjectGlobe';
 import ProjectSidebar from '../components/ProjectSidebar';
 
-
 export default function ProjectsPage() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                // Fetch projects from Sanity
+                const query = `*[_type == "project"] | order(year desc) {
+                    "id": _id,
+                    title,
+                    "type": category,
+                    tags,
+                    location,
+                    lat,
+                    lng,
+                    description,
+                    "image": mainImage.asset->url,
+                    scale,
+                    logic,
+                    ref
+                }`;
+                const data = await sanityClient.fetch(query);
+                setProjects(data);
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
+
     useEffect(() => {
         const observerOptions = {
             threshold: 0.1,
@@ -27,6 +59,17 @@ export default function ProjectsPage() {
 
         return () => observer.disconnect();
     }, []);
+
+    if (loading) {
+        return (
+            <main className="pb-24 bg-background text-on-background min-h-screen flex items-center justify-center">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-xs uppercase tracking-widest text-secondary font-mono">Loading Data...</span>
+                </div>
+            </main>
+        );
+    }
 
     return (
         <main className="pb-24 bg-background text-on-background font-body antialiased blueprint-grid selection:bg-primary-container selection:text-on-primary-container min-h-screen">
@@ -58,14 +101,14 @@ export default function ProjectsPage() {
             <ProjectSidebar project={selectedProject} onClose={() => setSelectedProject(null)} />
 
             {/* Header Section */}
-            <header className="px-6 md:px-12 max-w-screen-2xl mx-auto pt-12 pb-24 border-b border-outline-variant/20 mb-24">
-                <div className="flex flex-col md:flex-row justify-between items-end gap-12">
+            <header className="px-5 md:px-8 lg:px-12 max-w-screen-2xl mx-auto pt-10 pb-16 md:pb-24 border-b border-outline-variant/20 mb-16 md:mb-24">
+                <div className="flex flex-col gap-8 md:flex-row md:justify-between md:items-end">
                     <div className="flex-1">
                         <div className="flex items-center gap-4 mb-8">
                             <div className="h-[1px] w-12 bg-primary"></div>
                             <span className="text-[10px] uppercase tracking-[0.4em] text-secondary font-bold font-mono">SYSTEM.REGISTRY // V2.04</span>
                         </div>
-                        <h1 className="font-headline text-6xl md:text-8xl lg:text-[10rem] text-primary tracking-tighter leading-[0.85] mb-4">
+                        <h1 className="font-headline text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] text-primary tracking-tighter leading-[0.85] mb-4">
                             Future <br /><span className="italic text-outline">Structures.</span>
                         </h1>
                         <div className="flex gap-4 mt-8 opacity-40">
@@ -74,7 +117,7 @@ export default function ProjectsPage() {
                              <span className="text-[8px] font-mono uppercase tracking-tighter">Status: Authenticated</span>
                         </div>
                     </div>
-                    <div className="max-w-md pb-4 text-right">
+                    <div className="md:max-w-md pb-4 md:text-right">
                         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-8">
                             A systematic archival of spatial interventions and material endurance. Our global portfolio serves as a technical legend for sustainable architectural evolution.
                         </p>
@@ -94,7 +137,7 @@ export default function ProjectsPage() {
             </header>
 
             {/* Global Distribution Globe */}
-            <section className="px-6 md:px-12 max-w-screen-2xl mx-auto mb-12">
+            <section className="px-5 md:px-8 lg:px-12 max-w-screen-2xl mx-auto mb-12">
                 <div className="flex flex-col md:flex-row justify-between items-baseline gap-4 mb-12 border-l-4 border-primary pl-8">
                     <div>
                         <h2 className="font-headline text-4xl md:text-5xl text-primary tracking-tight mb-2">Global Distribution.</h2>
@@ -105,7 +148,7 @@ export default function ProjectsPage() {
                     </p>
                 </div>
                 
-                <ProjectGlobe onProjectClick={setSelectedProject} />
+                <ProjectGlobe projects={projects} onProjectClick={setSelectedProject} />
             </section>
 
         </main>
