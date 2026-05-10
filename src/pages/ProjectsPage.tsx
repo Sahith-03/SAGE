@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Project } from '../data/projects';
-import { sanityClient, urlFor } from '../lib/sanity';
+import { sanityClient } from '../lib/sanity';
 import ProjectGlobe from '../components/ProjectGlobe';
 import ProjectSidebar from '../components/ProjectSidebar';
 
