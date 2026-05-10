@@ -323,11 +323,11 @@ export default function CareersPage() {
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="applicantPhone">Contact Number</label>
-                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantPhone" placeholder="+91 XXXXX XXXXX" required type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantPhone" placeholder="+91 7989056463" required type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="applicantEmail">Email Address</label>
-                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantEmail" placeholder="OFFICE@DOMAIN.COM" required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantEmail" placeholder="office@sagedesignlabs.org" required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="resume">Resume / Portfolio (PDF)</label>

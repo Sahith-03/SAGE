@@ -164,10 +164,10 @@ export default function Layout() {
                             <a href="#" className="text-[#002d56] hover:scale-110 transition-transform">
                                 <i className="fa-brands fa-linkedin text-xl"></i>
                             </a>
-                            <a href="mailto:sagedesignlabs@gmail.com" className="text-[#002d56] hover:scale-110 transition-transform">
+                            <a href="mailto:office@sagedesignlabs.org" className="text-[#002d56] hover:scale-110 transition-transform">
                                 <i className="fa-regular fa-envelope text-xl"></i>
                             </a>
-                            <a href="https://wa.me/#" className="text-[#002d56] hover:scale-110 transition-transform">
+                            <a href="https://wa.me/917989056463" className="text-[#002d56] hover:scale-110 transition-transform">
                                 <i className="fa-brands fa-whatsapp text-xl"></i>
                             </a>
                         </div>

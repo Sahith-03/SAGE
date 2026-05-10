@@ -72,11 +72,11 @@ export default function ContactPage() {
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="email">Email Address</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="OFFICE@DOMAIN.COM" required type="email" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="office@sagedesignlabs.org" required type="email" />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="phone">Contact Number</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 XXXXX XXXXX" required type="tel" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 7989056463" required type="tel" />
                                 </div>
                             </div>
 
@@ -121,7 +121,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest mb-2">Direct Channels</p>
-                                    <p className="text-sm font-body">+91 XXXXX XXXXX<br />sagedesignlabs@gmail.com</p>
+                                    <p className="text-sm font-body">+91 7989056463<br />office@sagedesignlabs.org</p>
                                 </div>
                             </div>
                         </div>
