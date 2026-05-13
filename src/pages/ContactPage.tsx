@@ -1,4 +1,47 @@
+import { useState } from 'react';
+import { sanityWriteClient } from '../lib/sanity';
+
 export default function ContactPage() {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        siteAddress: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        try {
+            await sanityWriteClient.create({
+                _type: 'contactSubmission',
+                ...formData,
+                status: 'new',
+                submittedAt: new Date().toISOString()
+            });
+            setSubmitStatus('success');
+            setFormData({
+                firstName: '', lastName: '', email: '', phone: '', projectType: '', siteAddress: '', message: ''
+            });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <main className="flex-grow pt-6 md:pt-8 blueprint-bg">
             <style>{`
@@ -60,23 +103,35 @@ export default function ContactPage() {
 
                         <h2 className="text-xs font-mono text-slate-500 uppercase tracking-[0.4em] mb-12">01 // Primary Information</h2>
                         
-                            <form className="space-y-10 md:space-y-12" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-10 md:space-y-12" onSubmit={handleSubmit}>
+                                {submitStatus === 'success' && (
+                                    <div className="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-none font-mono text-xs uppercase tracking-widest flex items-center">
+                                        <span className="material-symbols-outlined mr-3">check_circle</span>
+                                        Proposal submitted successfully. Our team will contact you shortly.
+                                    </div>
+                                )}
+                                {submitStatus === 'error' && (
+                                    <div className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-none font-mono text-xs uppercase tracking-widest flex items-center">
+                                        <span className="material-symbols-outlined mr-3">error</span>
+                                        There was an error submitting your proposal. Please try again.
+                                    </div>
+                                )}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="firstName">First Name</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="firstName" placeholder="e.g. MARCUS" required type="text" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="firstName" placeholder="e.g. MARCUS" required type="text" value={formData.firstName} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="lastName">Last Name</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="lastName" placeholder="e.g. AURELIUS" required type="text" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors placeholder:text-slate-300 outline-none font-medium" id="lastName" placeholder="e.g. AURELIUS" required type="text" value={formData.lastName} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="email">Email Address</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="office@sagedesignlabs.org" required type="email" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="office@sagedesignlabs.org" required type="email" value={formData.email} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="phone">Contact Number</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 7989056463" required type="tel" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 7989056463" required type="tel" value={formData.phone} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                             </div>
 
@@ -84,21 +139,21 @@ export default function ContactPage() {
                             <div className="space-y-10">
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="projectType">Project Designation / Type</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="projectType" placeholder="e.g. RESIDENTIAL, COMMERCIAL, ETC." required type="text" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="projectType" placeholder="e.g. RESIDENTIAL, COMMERCIAL, ETC." required type="text" value={formData.projectType} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="siteAddress">Site Address</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="siteAddress" placeholder="ENTER SITE LOCATION..." required type="text" />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="siteAddress" placeholder="ENTER SITE LOCATION..." required type="text" value={formData.siteAddress} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="message">Design Brief &amp; Site Parameters</label>
-                                    <textarea className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body resize-none transition-colors outline-none font-medium" id="message" placeholder="DESCRIBE PROGRAMMATIC REQUIREMENTS AND SUSTAINABILITY GOALS..." required rows={4}></textarea>
+                                    <textarea className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body resize-none transition-colors outline-none font-medium" id="message" placeholder="DESCRIBE PROGRAMMATIC REQUIREMENTS AND SUSTAINABILITY GOALS..." required rows={4} value={formData.message} onChange={handleChange} disabled={isSubmitting}></textarea>
                                 </div>
                             </div>
 
-                            <button className="w-full md:w-auto bg-primary text-white px-12 py-5 rounded-none font-mono uppercase tracking-[0.2em] text-xs hover:bg-[#124376] transition-all inline-flex items-center justify-center space-x-4 border border-primary font-bold" type="submit">
-                                <span>SUBMIT PROPOSAL</span>
-                                <span className="material-symbols-outlined text-base">send</span>
+                            <button className="w-full md:w-auto bg-primary text-white px-12 py-5 rounded-none font-mono uppercase tracking-[0.2em] text-xs hover:bg-[#124376] transition-all inline-flex items-center justify-center space-x-4 border border-primary font-bold disabled:opacity-50 disabled:cursor-not-allowed" type="submit" disabled={isSubmitting}>
+                                <span>{isSubmitting ? 'SUBMITTING...' : 'SUBMIT PROPOSAL'}</span>
+                                {!isSubmitting && <span className="material-symbols-outlined text-base">send</span>}
                             </button>
                         </form>
                     </div>

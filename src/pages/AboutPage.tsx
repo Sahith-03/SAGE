@@ -93,7 +93,7 @@ export default function AboutPage() {
                             </h1>
                             <div className="p-8 border-l-4 border-primary bg-surface-container-low/50">
                                 <p className="font-body text-lg text-on-surface-variant leading-relaxed">
-                                    We are architects of resilience, crafting spaces where structural integrity meets organic vitality.
+                                    At SAGE Design Labs, we believe built environments are not isolated objects they are living systems that shape behavior, community, and ecology.
                                 </p>
                             </div>
                             <div className="grid grid-cols-2 gap-4 mt-12">
@@ -113,7 +113,7 @@ export default function AboutPage() {
                                 <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-primary"></div>
                                 <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-primary"></div>
                                 <div className="relative overflow-hidden aspect-[4/5]">
-                                    <img alt="SAGE Sustainable Architecture" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src={`${import.meta.env.BASE_URL}images/about-hero.png`} />
+                                    <img alt="SAGE Sustainable Architecture" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src={`${import.meta.env.BASE_URL}images/about-hero-1.png`} />
                                     <div className="absolute bottom-0 left-0 bg-primary text-white p-6 w-full lg:w-auto">
                                         <span className="material-symbols-outlined text-secondary-fixed mb-2">architecture</span>
                                         <p className="text-sm font-headline italic">Precision in every detail, harmony in every space.</p>
