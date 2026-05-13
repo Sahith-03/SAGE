@@ -3,11 +3,13 @@ import type { Project } from '../data/projects';
 import { sanityClient } from '../lib/sanity';
 import ProjectGlobe from '../components/ProjectGlobe';
 import ProjectSidebar from '../components/ProjectSidebar';
+import PageLoader from '../components/PageLoader';
 
 export default function ProjectsPage() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showLoader, setShowLoader] = useState(true);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -60,13 +62,10 @@ export default function ProjectsPage() {
         return () => observer.disconnect();
     }, []);
 
-    if (loading) {
+    if (showLoader) {
         return (
-            <main className="pb-24 bg-background text-on-background min-h-screen flex items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                    <span className="text-xs uppercase tracking-widest text-secondary font-mono">Loading Data...</span>
-                </div>
+            <main className="pb-24 bg-background text-on-background min-h-screen flex items-center justify-center blueprint-grid">
+                <PageLoader isLoading={loading} overlay={false} onComplete={() => setShowLoader(false)} />
             </main>
         );
     }

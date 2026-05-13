@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PortableText } from '@portabletext/react';
 import { sanityClient, urlFor } from '../lib/sanity';
+import PageLoader from '../components/PageLoader';
 
 export default function BlogPostPage() {
     const { id: slug } = useParams<{ id: string }>();
     const [blog, setBlog] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [showLoader, setShowLoader] = useState(true);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -34,13 +36,10 @@ export default function BlogPostPage() {
         }
     }, [slug]);
 
-    if (loading) {
+    if (showLoader) {
         return (
             <main className="flex-grow flex items-center justify-center min-h-screen blueprint-bg">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                    <span className="text-xs uppercase tracking-widest text-secondary font-mono">Loading Post...</span>
-                </div>
+                <PageLoader isLoading={loading} overlay={false} onComplete={() => setShowLoader(false)} />
             </main>
         );
     }
