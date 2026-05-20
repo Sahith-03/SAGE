@@ -5,7 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/SAGE/',
+  base: '/',
   resolve: {
     alias: {
       // Use the self-contained UMD build which bundles its own Three.js copy
