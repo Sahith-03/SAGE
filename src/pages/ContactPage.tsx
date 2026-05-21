@@ -127,11 +127,11 @@ export default function ContactPage() {
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="email">Email Address</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="office@sagedesignlabs.org" required type="email" value={formData.email} onChange={handleChange} disabled={isSubmitting} />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="email" placeholder="e.g. marcus@example.com" required type="email" value={formData.email} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
                                     <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="phone">Contact Number</label>
-                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="+91 7989056463" required type="tel" value={formData.phone} onChange={handleChange} disabled={isSubmitting} />
+                                    <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="phone" placeholder="e.g. +1 234 567 8900" required type="tel" value={formData.phone} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                             </div>
 
@@ -146,7 +146,7 @@ export default function ContactPage() {
                                     <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body transition-colors outline-none font-medium" id="siteAddress" placeholder="ENTER SITE LOCATION..." required type="text" value={formData.siteAddress} onChange={handleChange} disabled={isSubmitting} />
                                 </div>
                                 <div className="relative">
-                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="message">Design Brief &amp; Site Parameters</label>
+                                    <label className="text-xs uppercase font-mono tracking-widest text-slate-500 mb-2 block font-bold" htmlFor="message">DESIGN BRIEF &amp; REQUIREMENTS</label>
                                     <textarea className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-3 px-0 text-base font-body resize-none transition-colors outline-none font-medium" id="message" placeholder="DESCRIBE PROGRAMMATIC REQUIREMENTS AND SUSTAINABILITY GOALS..." required rows={4} value={formData.message} onChange={handleChange} disabled={isSubmitting}></textarea>
                                 </div>
                             </div>
