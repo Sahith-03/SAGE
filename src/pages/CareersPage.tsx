@@ -179,9 +179,9 @@ export default function CareersPage() {
                             SAGE is committed to individual growth; offering mentorship and private design coaching. These resources have helped me immensely to develop my parametric skills and advance my career.
                         </p>
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">AW</div>
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">GA</div>
                             <div>
-                                <span className="block font-label text-xs font-bold text-primary">Ashley Wallace</span>
+                                <span className="block font-label text-xs font-bold text-primary">G. Anirudh</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Associate | Project Architect</span>
                             </div>
                         </div>
@@ -192,9 +192,9 @@ export default function CareersPage() {
                             You're not siloed at SAGE — you have opportunities to be involved, learn, and contribute in a meaningful way. The team encourages you to take initiative and shape your own path.
                         </p>
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">AS</div>
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">MG</div>
                             <div>
-                                <span className="block font-label text-xs font-bold text-primary">Alec Solow</span>
+                                <span className="block font-label text-xs font-bold text-primary">Manish Goreti</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Project Manager I</span>
                             </div>
                         </div>
@@ -205,9 +205,9 @@ export default function CareersPage() {
                             If your goal is to become a well-rounded architect, capable of directing a sustainable project from beginning to end, this is a great place to grow and learn.
                         </p>
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">BE</div>
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">AC</div>
                             <div>
-                                <span className="block font-label text-xs font-bold text-primary">Blake Evans</span>
+                                <span className="block font-label text-xs font-bold text-primary">Abhishek. C</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Associate | Project Manager II</span>
                             </div>
                         </div>
@@ -323,11 +323,11 @@ export default function CareersPage() {
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="applicantPhone">Contact Number</label>
-                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantPhone" placeholder="+91 7989056463" required type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantPhone" placeholder="e.g. +1 234 567 8900" required type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="applicantEmail">Email Address</label>
-                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantEmail" placeholder="office@sagedesignlabs.org" required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                                            <input className="w-full bg-transparent border-0 border-b border-slate-300 text-slate-800 focus:ring-0 focus:border-primary py-2 px-0 text-base font-body transition-colors outline-none font-medium" id="applicantEmail" placeholder="e.g. marcus@example.com" required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
                                         </div>
                                         <div className="relative">
                                             <label className="text-[11px] uppercase font-mono tracking-widest text-slate-500 mb-1.5 block font-bold" htmlFor="resume">Resume / Portfolio (PDF)</label>

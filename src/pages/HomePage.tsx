@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { sanityClient } from '../lib/sanity';
 
 export default function HomePage() {
     useEffect(() => {
@@ -16,6 +17,36 @@ export default function HomePage() {
         }, observerOptions);
         document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         return () => observer.disconnect();
+    }, []);
+
+    const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchFeaturedProjects = async () => {
+            try {
+                const query = `*[_type == "project"] | order(year desc) {
+                    "id": _id,
+                    title,
+                    category,
+                    description,
+                    "image": mainImage.asset->url,
+                    ref
+                }`;
+                const data = await sanityClient.fetch(query);
+                
+                const categoryMap = new Map();
+                data.forEach((p: any) => {
+                    if (!categoryMap.has(p.category)) {
+                        categoryMap.set(p.category, p);
+                    }
+                });
+                setFeaturedProjects(Array.from(categoryMap.values()));
+            } catch (error) {
+                console.error("Error fetching featured projects:", error);
+            }
+        };
+
+        fetchFeaturedProjects();
     }, []);
 
     return (
@@ -140,71 +171,80 @@ export default function HomePage() {
                 {/* Projects grid — 2 columns: left large, right stacked */}
                 <div className="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6 reveal-on-scroll">
                     {/* Left: Large Feature Card */}
-                    <div className="group relative overflow-hidden bg-[#191c1c]" style={{ minHeight: '580px' }}>
-                        <img
-                            src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2000&auto=format&fit=crop"
-                            alt="The Canopy House"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#001a36]/95 to-transparent p-8">
-                            <span className="font-mono text-[10px] text-white/60 uppercase tracking-widest block mb-2">RESIDENTIAL // 001</span>
-                            <h3 className="font-headline text-3xl text-white mb-3">The Canopy House</h3>
-                            <p className="font-body text-sm text-white/70 mb-5 max-w-sm leading-relaxed">
-                                A zero-emission residential retreat utilizing passive solar design and structural timber to blend into its forested site.
-                            </p>
-                            <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-white/80 uppercase tracking-widest border-b border-white/30 pb-px hover:text-white transition-colors">
-                                <span className="w-6 h-px bg-white/60"></span>
-                                EXPLORE TECHNICAL SPECS
-                            </Link>
+                    {featuredProjects.length > 0 && (
+                        <div className="group relative overflow-hidden bg-[#191c1c] flex flex-col" style={{ minHeight: '580px' }}>
+                            {featuredProjects[0].image ? (
+                                <img
+                                    src={featuredProjects[0].image}
+                                    alt={featuredProjects[0].title}
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
+                                />
+                            ) : (
+                                <div className="absolute inset-0 bg-[#001a36] flex flex-col items-center justify-center border border-[#a4c8ff]/10">
+                                    <div className="absolute inset-0 opacity-10 pointer-events-none"
+                                        style={{
+                                            backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
+                                            backgroundSize: '30px 30px'
+                                        }}
+                                    ></div>
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(164,200,255,0.2)" strokeWidth="1" className="mb-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                    <span className="font-mono text-[12px] text-[#a4c8ff]/40 uppercase tracking-widest">{featuredProjects[0].ref || 'IMG_PENDING'}</span>
+                                    <span className="font-mono text-[10px] text-[#a4c8ff]/30 uppercase tracking-widest mt-2">AWAITING VISUAL DATA</span>
+                                </div>
+                            )}
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#001a36]/95 to-transparent p-8">
+                                <span className="font-mono text-[10px] text-white/60 uppercase tracking-widest block mb-2">{featuredProjects[0].category} // 001</span>
+                                <h3 className="font-headline text-3xl text-white mb-3">{featuredProjects[0].title}</h3>
+                                {featuredProjects[0].description && (
+                                    <p className="font-body text-sm text-white/70 mb-5 max-w-sm leading-relaxed line-clamp-2">
+                                        {featuredProjects[0].description}
+                                    </p>
+                                )}
+                                <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-white/80 uppercase tracking-widest border-b border-white/30 pb-px hover:text-white transition-colors">
+                                    <span className="w-6 h-px bg-white/60"></span>
+                                    EXPLORE TECHNICAL SPECS
+                                </Link>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
-                    {/* Right: 2 stacked cards */}
-                    <div className="flex flex-col gap-6">
-                        {/* Card 2 — dark with blueprint overlay */}
-                        <div className="group relative overflow-hidden bg-[#001a36]" style={{ minHeight: '278px' }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop"
-                                alt="Meridian Tower"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-30"
-                            />
-                            {/* Blueprint grid overlay */}
-                            <div className="absolute inset-0 opacity-10"
-                                style={{
-                                    backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
-                                    backgroundSize: '30px 30px'
-                                }}
-                            ></div>
-                            <div className="absolute bottom-0 left-0 p-6">
-                                <span className="font-mono text-[9px] text-[#a4c8ff]/60 uppercase tracking-widest block mb-1">SPEC_ID: CRT_88 // GL_04</span>
-                                <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">COMMERCIAL</span>
-                                <h3 className="font-headline text-2xl text-white">Meridian Tower</h3>
-                            </div>
+                    {/* Right: Stacked cards */}
+                    {featuredProjects.length > 1 && (
+                        <div className="flex flex-col gap-6">
+                            {featuredProjects.slice(1, 3).map((project, index) => (
+                                <div key={project.id || index} className="group relative overflow-hidden bg-[#001a36] flex-1 flex flex-col" style={{ minHeight: '278px' }}>
+                                    {project.image ? (
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-30 group-hover:opacity-50"
+                                        />
+                                    ) : (
+                                        <div className="absolute inset-0 bg-[#001a36] flex flex-col items-center justify-center border border-[#a4c8ff]/10">
+                                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(164,200,255,0.2)" strokeWidth="1" className="mb-3">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                            </svg>
+                                            <span className="font-mono text-[10px] text-[#a4c8ff]/30 uppercase tracking-widest">NO IMAGE</span>
+                                        </div>
+                                    )}
+                                    {/* Blueprint grid overlay */}
+                                    <div className="absolute inset-0 opacity-10 pointer-events-none"
+                                        style={{
+                                            backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
+                                            backgroundSize: '30px 30px'
+                                        }}
+                                    ></div>
+                                    <div className="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-[#001a36]/90 to-transparent">
+                                        <span className="font-mono text-[9px] text-[#a4c8ff]/60 uppercase tracking-widest block mb-1">SPEC_ID: {project.ref || `GEN_0${index + 2}`}</span>
+                                        <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">{project.category}</span>
+                                        <h3 className="font-headline text-2xl text-white">{project.title}</h3>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-
-                        {/* Card 3 — dark healthcare */}
-                        <div className="group relative overflow-hidden bg-[#001a36]" style={{ minHeight: '278px' }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1200&auto=format&fit=crop"
-                                alt="Oasis Wellness Pavilion"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-25"
-                            />
-                            <div className="absolute inset-0 opacity-10"
-                                style={{
-                                    backgroundImage: 'linear-gradient(to right, rgba(164,200,255,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(164,200,255,0.4) 1px, transparent 1px)',
-                                    backgroundSize: '30px 30px'
-                                }}
-                            ></div>
-                            <div className="absolute top-2 right-3">
-                                <span className="font-mono text-[9px] text-[#ff6b6b] uppercase tracking-widest">SAGE WORK</span>
-                            </div>
-                            <div className="absolute bottom-0 left-0 p-6">
-                                <span className="font-mono text-[9px] text-[#a4c8ff]/60 uppercase tracking-widest block mb-1">SPEC_ID: MED_02 // BIO_19</span>
-                                <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">HEALTHCARE</span>
-                                <h3 className="font-headline text-2xl text-white">Oasis Wellness Pavilion</h3>
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </section>
 

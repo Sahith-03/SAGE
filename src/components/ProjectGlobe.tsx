@@ -207,6 +207,12 @@ function ProjectGlobe({ projects, onProjectClick }: ProjectGlobeProps) {
           if (outerRef.current) {
             outerRef.current.style.cursor = d ? 'pointer' : 'default';
           }
+          if (globe) {
+            const controls = globe.controls();
+            if (controls) {
+              controls.autoRotate = !d;
+            }
+          }
         })
         
         // Tooltip
