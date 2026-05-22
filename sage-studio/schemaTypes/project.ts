@@ -36,6 +36,13 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'gallery',
+      title: 'Image Gallery',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      description: 'Multiple images for the project'
+    }),
+    defineField({
       name: 'location',
       title: 'Location',
       type: 'string',

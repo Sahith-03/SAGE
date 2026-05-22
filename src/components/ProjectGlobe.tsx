@@ -264,15 +264,16 @@ function ProjectGlobe({ projects, onProjectClick }: ProjectGlobeProps) {
 
     init();
 
+    const currentMount = mountRef.current;
     return () => {
       cancelAnimationFrame(rafId);
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();
       if (globeRef.current) {
-        try { globeRef.current._destructor?.(); } catch (_) {}
+        try { globeRef.current._destructor?.(); } catch { /* ignore */ }
         globeRef.current = null;
       }
-      if (mountRef.current) mountRef.current.innerHTML = '';
+      if (currentMount) currentMount.innerHTML = '';
     };
   }, [projects]);
 

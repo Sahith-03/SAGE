@@ -8,6 +8,7 @@ export interface Project {
   lng: number;
   description: string;
   image: string;
+  gallery?: string[];
   scale: string;
   logic: string;
   ref: string;

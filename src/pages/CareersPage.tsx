@@ -172,40 +172,40 @@ export default function CareersPage() {
 
             {/* Testimonials */}
             <section className="mb-24 relative bg-surface-container-highest p-6 md:p-12 border border-outline-variant">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <div className="relative">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
+                    <div className="relative flex flex-col h-full">
                         <span className="text-6xl text-primary/20 absolute -top-6 -left-4 font-serif">"</span>
-                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic">
+                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic flex-grow">
                             SAGE is committed to individual growth; offering mentorship and private design coaching. These resources have helped me immensely to develop my parametric skills and advance my career.
                         </p>
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">GA</div>
+                        <div className="flex items-center gap-4 mt-auto">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase shrink-0">GA</div>
                             <div>
                                 <span className="block font-label text-xs font-bold text-primary">G. Anirudh</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Associate | Project Architect</span>
                             </div>
                         </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative flex flex-col h-full">
                         <span className="text-6xl text-primary/20 absolute -top-6 -left-4 font-serif">"</span>
-                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic">
+                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic flex-grow">
                             You're not siloed at SAGE — you have opportunities to be involved, learn, and contribute in a meaningful way. The team encourages you to take initiative and shape your own path.
                         </p>
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">MG</div>
+                        <div className="flex items-center gap-4 mt-auto">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase shrink-0">MG</div>
                             <div>
                                 <span className="block font-label text-xs font-bold text-primary">Manish Goreti</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Project Manager I</span>
                             </div>
                         </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative flex flex-col h-full">
                         <span className="text-6xl text-primary/20 absolute -top-6 -left-4 font-serif">"</span>
-                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic">
+                        <p className="font-body text-sm text-on-surface-variant leading-relaxed font-light mb-6 relative z-10 italic flex-grow">
                             If your goal is to become a well-rounded architect, capable of directing a sustainable project from beginning to end, this is a great place to grow and learn.
                         </p>
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase">AC</div>
+                        <div className="flex items-center gap-4 mt-auto">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs uppercase shrink-0">AC</div>
                             <div>
                                 <span className="block font-label text-xs font-bold text-primary">Abhishek. C</span>
                                 <span className="block text-[10px] uppercase tracking-widest text-slate-500">Associate | Project Manager II</span>

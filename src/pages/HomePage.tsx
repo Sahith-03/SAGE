@@ -79,13 +79,7 @@ export default function HomePage() {
 
                 {/* Hero content */}
                 <div className="relative z-10 flex flex-col justify-end h-full px-5 md:px-10 lg:px-16 pb-14 md:pb-20 max-w-screen-2xl mx-auto w-full">
-                    {/* Section ID tag */}
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="w-8 h-px bg-white/60"></div>
-                        <span className="font-mono text-[10px] text-white/60 uppercase tracking-[0.3em]">
-                            SECTION_ID: HERO_01 // PHASE: CONCEPTUALIZATION
-                        </span>
-                    </div>
+
 
                     {/* Main headline */}
                     <h1 className="font-headline text-white leading-[1.0] tracking-tight max-w-4xl">
@@ -172,7 +166,7 @@ export default function HomePage() {
                 <div className="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6 reveal-on-scroll">
                     {/* Left: Large Feature Card */}
                     {featuredProjects.length > 0 && (
-                        <div className="group relative overflow-hidden bg-[#191c1c] flex flex-col" style={{ minHeight: '580px' }}>
+                        <Link to="/projects" state={{ projectId: featuredProjects[0].id }} className="group relative overflow-hidden bg-[#191c1c] flex flex-col block w-full h-full" style={{ minHeight: '580px' }}>
                             {featuredProjects[0].image ? (
                                 <img
                                     src={featuredProjects[0].image}
@@ -202,19 +196,19 @@ export default function HomePage() {
                                         {featuredProjects[0].description}
                                     </p>
                                 )}
-                                <Link to="/projects" className="inline-flex items-center gap-2 font-mono text-[10px] text-white/80 uppercase tracking-widest border-b border-white/30 pb-px hover:text-white transition-colors">
+                                <span className="inline-flex items-center gap-2 font-mono text-[10px] text-white/80 uppercase tracking-widest border-b border-white/30 pb-px hover:text-white transition-colors">
                                     <span className="w-6 h-px bg-white/60"></span>
                                     EXPLORE TECHNICAL SPECS
-                                </Link>
+                                </span>
                             </div>
-                        </div>
+                        </Link>
                     )}
 
                     {/* Right: Stacked cards */}
                     {featuredProjects.length > 1 && (
                         <div className="flex flex-col gap-6">
-                            {featuredProjects.slice(1, 3).map((project, index) => (
-                                <div key={project.id || index} className="group relative overflow-hidden bg-[#001a36] flex-1 flex flex-col" style={{ minHeight: '278px' }}>
+                            {featuredProjects.slice(1).map((project, index) => (
+                                <Link to="/projects" state={{ projectId: project.id }} key={project.id || index} className="group relative overflow-hidden bg-[#001a36] flex-1 flex flex-col block w-full h-full" style={{ minHeight: '278px' }}>
                                     {project.image ? (
                                         <img
                                             src={project.image}
@@ -241,7 +235,7 @@ export default function HomePage() {
                                         <span className="font-mono text-[10px] text-[#a4c8ff] uppercase tracking-widest font-bold block mb-2">{project.category}</span>
                                         <h3 className="font-headline text-2xl text-white">{project.title}</h3>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     )}

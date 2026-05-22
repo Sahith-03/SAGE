@@ -133,13 +133,19 @@ export default function BlogsPage() {
                         ))}
                         {filteredBlogs.length === 0 && (
                             <div className="col-span-full py-24 text-center">
-                                <p className="font-headline text-2xl text-outline-variant">No posts found with the tag "{selectedTag}"</p>
-                                <button 
-                                    onClick={() => setSelectedTag(null)}
-                                    className="mt-4 text-primary font-mono uppercase tracking-widest text-xs font-bold hover:underline cursor-none"
-                                >
-                                    Clear filters
-                                </button>
+                                {selectedTag ? (
+                                    <>
+                                        <p className="font-headline text-2xl text-outline-variant">No posts found with the tag "{selectedTag}"</p>
+                                        <button 
+                                            onClick={() => setSelectedTag(null)}
+                                            className="mt-4 text-primary font-mono uppercase tracking-widest text-xs font-bold hover:underline cursor-none"
+                                        >
+                                            Clear filters
+                                        </button>
+                                    </>
+                                ) : (
+                                    <p className="font-headline text-2xl text-outline-variant">No blog posts available at the moment.</p>
+                                )}
                             </div>
                         )}
                     </div>

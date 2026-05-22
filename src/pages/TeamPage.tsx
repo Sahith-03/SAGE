@@ -148,7 +148,7 @@ export default function TeamPage() {
                             <img alt="Pragada Lakshmi Priya" className="w-full h-full object-cover grayscale brightness-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" src={`${import.meta.env.BASE_URL}images/Priya.png`} />
                             <div className="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
                         </div>
-                        <div className="grid grid-cols-1 gap-px bg-outline-variant">
+                        {/* <div className="grid grid-cols-1 gap-px bg-outline-variant">
                             <div className="bg-surface p-6 flex justify-between items-center">
                                 <div>
                                     <span className="block text-[10px] uppercase tracking-widest text-slate-400 mb-1">Portfolio Status</span>
@@ -156,20 +156,18 @@ export default function TeamPage() {
                                 </div>
                                 <span className="material-symbols-outlined text-primary text-xl">arrow_outward</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
 
             {/* Global Technical Specs (Bottom Highlight) */}
             <section className="mt-16 py-16 border-t border-outline-variant">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div className="md:col-span-2">
-                        <h3 className="font-headline text-4xl text-primary mb-6">The SAGE Standard</h3>
-                        <p className="font-body text-xl text-on-surface-variant font-light leading-relaxed">
-                            Our team operates as a single organism, utilizing advanced BIM integration and parametric modeling to ensure every design choice is backed by environmental data and structural integrity.
-                        </p>
-                    </div>
+                <div className="w-full">
+                    <h3 className="font-headline text-4xl text-primary mb-6">The SAGE Standard</h3>
+                    <p className="font-body text-xl text-on-surface-variant font-light leading-relaxed">
+                        Our team operates as a single organism, utilizing advanced BIM integration and parametric modeling to ensure every design choice is backed by environmental data and structural integrity.
+                    </p>
                 </div>
             </section>
         </main>

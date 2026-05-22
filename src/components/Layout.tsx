@@ -10,6 +10,7 @@ export default function Layout() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        // eslint-disable-next-line
         setIsMenuOpen(false);
     }, [pathname]);
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Project } from '../data/projects';
 
@@ -7,6 +8,16 @@ interface ProjectSidebarProps {
 }
 
 export default function ProjectSidebar({ project, onClose }: ProjectSidebarProps) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (project) {
+      setActiveImageIndex(0);
+    }
+  }, [project]);
+
+  const images = project ? Array.from(new Set([project.image, ...(project.gallery || [])].filter(Boolean))) : [];
+
   return (
     <AnimatePresence>
       {project && (
@@ -43,17 +54,46 @@ export default function ProjectSidebar({ project, onClose }: ProjectSidebarProps
             </div>
 
             <div className="p-8 md:p-12">
-              {/* Cover Image */}
-              <div className="relative mb-12 overflow-hidden bg-surface-container aspect-video border border-outline-variant/20">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                />
-                <div className="absolute top-4 left-4 bg-primary text-white text-[8px] font-mono px-2 py-1 uppercase tracking-tighter">
-                  Visual_Capture: Active
+              {/* Cover Image & Gallery */}
+              {images.length > 0 && (
+                <div className="mb-12">
+                  <div className="relative overflow-hidden bg-surface-container aspect-video border border-outline-variant/20 mb-4 group">
+                    <img 
+                      src={images[activeImageIndex]} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                    />
+                    <div className="absolute top-4 left-4 bg-primary text-white text-[8px] font-mono px-2 py-1 uppercase tracking-tighter">
+                      Visual_Capture: Active
+                    </div>
+                    {images.length > 1 && (
+                      <div className="absolute bottom-4 right-4 bg-primary/80 backdrop-blur-sm text-white text-[10px] font-mono px-3 py-1.5 uppercase tracking-widest flex gap-2">
+                        <span>{String(activeImageIndex + 1).padStart(2, '0')}</span>
+                        <span className="text-white/50">/</span>
+                        <span className="text-white/50">{String(images.length).padStart(2, '0')}</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {images.length > 1 && (
+                    <div className="flex gap-2 overflow-x-auto pb-2 snap-x scrollbar-hide">
+                      {images.map((img, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveImageIndex(idx)}
+                          className={`relative flex-shrink-0 w-20 aspect-video border overflow-hidden snap-start transition-all ${
+                            idx === activeImageIndex 
+                              ? 'border-primary opacity-100 scale-100' 
+                              : 'border-outline-variant/30 opacity-60 hover:opacity-100 scale-95 hover:scale-100'
+                          }`}
+                        >
+                          <img src={img} alt={`${project.title} - view ${idx + 1}`} className="w-full h-full object-cover grayscale" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
 
               {/* Title & Metadata */}
               <div className="mb-16">

@@ -81,7 +81,7 @@ export default function ContactPage() {
                         <div className="absolute -top-4 -right-4 w-12 h-12 border-t-2 border-r-2 border-primary/20 pointer-events-none"></div>
                         <div className="absolute -bottom-4 -left-4 w-12 h-12 border-b-2 border-l-2 border-primary/20 pointer-events-none"></div>
                         <div className="h-64 lg:h-[500px] bg-slate-100 relative overflow-hidden border border-slate-200">
-                            <img alt="Architectural drafting" className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:scale-105 transition-transform duration-[2s]" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop" />
+                            <img alt="Architectural drafting" className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop" />
                             <div className="absolute top-4 right-4 bg-white/80 backdrop-blur px-3 py-1 text-[10px] font-mono tracking-tighter border border-slate-200">A-101 // STUDIO VIEW</div>
                         </div>
                     </div>

@@ -220,9 +220,9 @@ export default function AboutPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="aspect-[4/3] bg-surface-container-low overflow-hidden relative border border-outline-variant">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop" alt="Why SAGE" className="w-full h-full object-cover grayscale opacity-80" />
-                        <div className="absolute inset-0 bg-[#002d56]/10"></div>
+                    <div className="aspect-[4/3] bg-surface-container-low overflow-hidden relative border border-outline-variant group">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop" alt="Why SAGE" className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" />
+                        <div className="absolute inset-0 bg-[#002d56]/10 group-hover:bg-transparent transition-colors duration-700"></div>
                     </div>
                 </div>
             </section>
